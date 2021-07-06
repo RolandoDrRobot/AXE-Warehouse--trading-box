@@ -8,10 +8,12 @@ const port = process.env.PORT || 3000
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/client/index.html'));
-})
+});
+app.use(express.static('src/client'));
+
 
 app.listen(port, () => {
-  console.log(`App listening at http://localhost:${port}`)
+  console.log(`App listening at http://localhost:${port}`);
 })
 
 //routes

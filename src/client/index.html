@@ -1,1 +1,159 @@
-Hola papi
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./css/main.css">
+    <title>BinoBot Jason v1</title>
+  </head>
+  <body>
+
+    <nav class="fixed-top">
+      <div class="container d-flex justify-content-between">
+        <div>
+          <img src="img/logo.svg" alt="Logo" class="logo mr-2" />BinoBot
+        </div>
+        <div class="d-flex align-items-center">
+          <p class="m-0">v2.0</p>
+        </div>
+      </div>
+      <div class="prices d-flex justify-content-center">
+        <label><img class="coin" src="img/bitcoin.png" /> $<span class="js-btc-quote"></span></label>
+        <label><img class="coin" src="img/ethereum.png" /> $<span class="js-eth-quote"></span></label>
+        <label><img class="coin" src="img/xrp.png" /> $<span class="js-xrp-quote"></span></label>
+      </div>
+    </nav>
+
+    <div class="bot">
+      <div class="headline d-flex align-items-center justify-content-between">
+        <h3 class="js-bot-name d-inline m-0"></h3>
+        <a href="#" class="js-update-balances update-balances">Actualizar</a>
+      </div>
+      <div class="wallet mt-3">
+        <!-- USDT -->
+        <div class="currency row">
+          <div class="col-2 mb-1 d-flex align-items-center justify-content-center">
+            <img class="coin" src="img/tether.png" />
+          </div>
+          <div class="col-3 p-1 mb-1 text-center">
+            <p class="js-usdt-total m-0"></p>
+            <label>Total</label>
+          </div>
+          <div class="col-3 p-1 text-center">
+            <p class="js-usdt-used m-0"></p>
+            <label>In Order</label>
+          </div>
+          <div class="col-3 p-1 text-center">
+            <p class="js-usdt-avaliable m-0"></p>
+            <label>Avaliable</label>
+          </div>
+        </div>
+        <!-- BTC -->
+        <div class="currency row">
+          <div class="col-2 mb-1 d-flex align-items-center justify-content-center">
+            <img class="coin" src="img/bitcoin.png" />
+          </div>
+          <div class="col-3 p-1 mb-1 text-center">
+            <p class="js-btc-total m-0"></p>
+            <label>Total</label>
+          </div>
+          <div class="col-3 p-1 text-center">
+            <p class="js-btc-used m-0"></p>
+            <label>In Order</label>
+          </div>
+          <div class="col-3 p-1 text-center">
+            <p class="js-btc-avaliable m-0"></p>
+            <label>Avaliable</label>
+          </div>
+        </div>
+        <!-- ETH -->
+        <div class="currency row">
+          <div class="col-2 mb-1 d-flex align-items-center justify-content-center">
+            <img class="coin" src="img/ethereum.png" />
+          </div>
+          <div class="col-3 p-1 mb-1 text-center">
+            <p class="js-eth-total m-0"></p>
+            <label>Total</label>
+          </div>
+          <div class="col-3 p-1 text-center">
+            <p class="js-eth-used m-0"></p>
+            <label>In Order</label>
+          </div>
+          <div class="col-3 p-1 text-center">
+            <p class="js-eth-avaliable m-0"></p>
+            <label>Avaliable</label>
+          </div>
+        </div>
+        <!-- XRP -->
+        <div class="currency row">
+          <div class="col-2 mb-1 d-flex align-items-center justify-content-center">
+            <img class="coin" src="img/xrp.png" />
+          </div>
+          <div class="col-3 p-1 mb-1 text-center">
+            <p class="js-xrp-total m-0"></p>
+            <label>Total</label>
+          </div>
+          <div class="col-3 p-1 text-center">
+            <p class="js-xrp-used m-0"></p>
+            <label>In Order</label>
+          </div>
+          <div class="col-3 p-1 text-center">
+            <p class="js-xrp-avaliable m-0"></p>
+            <label>Avaliable</label>
+          </div>
+        </div>  
+      </div>
+    </div>
+
+    <!-- <div class="trade-box">
+      <div class="coins row">
+        <div class="col-4">
+          <p>BTC</p>
+        </div>
+        <div class="col-4">
+          <p>Eth</p>
+        </div>
+        <div class="col-4">
+          <p>XRP</p>
+        </div>
+      </div>
+      <div class="transanction-type row">
+        <div class="col-3">
+          <p>Market</p>
+        </div>
+        <div class="col-3">
+          <p>Limit</p>
+        </div>
+        <div class="col-3">
+          <p>Buy</p>
+        </div>
+        <div class="col-3">
+          <p>Sell</p>
+        </div>
+      </div>
+      <div class="amount row">
+        <div class="col-7">
+          <input type="text" placeholder="Amount" />
+        </div>
+        <div class="col-5">
+          <p>$1,232</p>
+        </div>
+      </div>
+      <div class="submit-order row">
+        <div class="col-7">
+          <input type="text" placeholder="Price" />
+        </div>
+        <div class="col-5">
+          <p>Create Order</p>
+        </div>
+      </div>
+    </div> -->
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <script src="./js/exchange.js"></script>
+  </body>
+</html>

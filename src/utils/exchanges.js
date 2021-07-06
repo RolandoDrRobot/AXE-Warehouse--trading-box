@@ -13,13 +13,13 @@ const fetchBalances = async () => {
 }
 
 const fetchQuotes = async () => {
-  const btcQuote = await exchangeClient.fetchTicker('BTC/USD');
+  const btcQuote = await exchangeClient.fetchTicker('BTC/USDT');
   const btcPrice = btcQuote.bid;
 
-  const ethQuote = await exchangeClient.fetchTicker('ETH/USD');
+  const ethQuote = await exchangeClient.fetchTicker('ETH/USDT');
   const ethPrice = ethQuote.bid;
 
-  const xrpQuote = await exchangeClient.fetchTicker('XRP/USD');
+  const xrpQuote = await exchangeClient.fetchTicker('XRP/USDT');
   const xrpPrice = xrpQuote.bid;
 
   return {
