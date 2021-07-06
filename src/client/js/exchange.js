@@ -24,8 +24,19 @@ function fetchBalances() {
   });
 }
 
+
+// Trading Box
+function highlightSelected(selectedOption) {
+  selectedOption.toggleClass('option--selected');
+  var isSelected = selectedOption.hasClass('option--selected');
+  selectedOption.find('input[type=radio]').attr('checked', isSelected);
+}
+
+
+
 function setListeners() {
   $('.js-update-balances').on('click', fetchBalances);
+  $('.js-option').on('click', highlightSelected($(this)));
 }
 
 ; (function init(){

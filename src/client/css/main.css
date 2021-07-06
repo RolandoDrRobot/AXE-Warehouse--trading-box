@@ -20,8 +20,14 @@ body {
 
 label,
 p {
+  font-size: 12px;
   line-height: 1;
   margin: 0;
+}
+
+::placeholder {
+  color: #00cfd6;
+  opacity: 1;
 }
 
 /* -----------------------
@@ -29,7 +35,7 @@ p {
 /* -------------------- */
 nav {
   background-color: var(--dark-tourquese);
-  padding: 20px 0;
+  padding: 15px 0 10px;
 }
 
 nav .logo {
@@ -37,9 +43,7 @@ nav .logo {
 }
 
 .prices {
-  margin-top: 12px;
-  padding: 8px 0;
-  background-color: var(--tourquese);
+  margin-top: 8px;
 }
 
 .prices label {
@@ -48,6 +52,7 @@ nav .logo {
 
 .prices .coin {
   width: 18px;
+  margin-right: 4px;
 }
 
 /* -----------------------
@@ -55,7 +60,7 @@ nav .logo {
 /* -------------------- */
 .bot {
   padding: 0 10px 15px;
-  margin: 140px 0 18px;
+  margin: 130px 0 18px;
 }
 
 .bot h3 {
@@ -82,28 +87,84 @@ nav .logo {
 }
 
 .currency .coin {
-  width: 40px;
+  width: 35px;
 }
 
 /* -----------------------
-/* --- New Bot --- 
+/* --- Trade Box --- 
 /* -------------------- */
-/* .NewBot h4 {
+.option {
+  padding: 4px 0;
+  border: 2px solid var(--main-bg-color);
+  border-radius: 4px;
+  box-shadow: 0 2px 8px 0 rgba(31, 46, 100, 0.3);
+  margin-bottom: 15px;
+  transition: all 0.2s;
+  cursor: pointer;
+  display: inline-block;
   text-align: center;
-  margin: 0 0 12px;
 }
 
-.NewBot input {
-  display: block;
-  width: 100%;
-  height: 45px;
-  text-align: center;
-  padding: 7px;
-  margin: 0 0 12px;
+.option:hover,
+.option--selected,
+.option:hover p,
+.option--selected p {
+  color: var(--dark-tourquese);
+  background-color: #fff;
 }
 
-.NewBot button {
-  display: block;
-  width: 100%;
-  height: 45px;
-} */
+.option p {
+  line-height: 2.1;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  transition: all 0.2s;
+}
+
+.option input[type=radio] {
+  position: absolute;
+  visibility: hidden;
+}
+
+.coins .option {
+  width: 30%;
+}
+
+.transanction-type .option {
+  width: 23%;
+}
+
+.amount input,
+.submit-order input {
+  width: 60%;
+  background-color: #2a5557;
+  color: #fff;
+  border: 0;
+  border-radius: 4px;
+  font-size: 14px;
+  padding: 6px 10px;
+}
+
+.amount label,
+.submit-order button {
+  font-size: 14px;
+  width: 38%;
+}
+
+.submit-order button {
+  font-weight: 600;
+  padding: 5px 0;
+  border: 0;
+  color: #fff;
+  background-color: var(--tourquese);
+}
+
+/* -----------------------
+/* --- Orders --- 
+/* -------------------- */
+
+.orders .option {
+  width: 80px;
+  margin: 0;
+}
