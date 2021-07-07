@@ -42,6 +42,10 @@ nav .logo {
   width: 40px;
 }
 
+.reload {
+  width: 30px;
+}
+
 .prices {
   margin-top: 8px;
 }
@@ -164,7 +168,7 @@ nav .logo {
 /* --- Orders --- 
 /* -------------------- */
 
-.orders .option {
-  width: 80px;
-  margin: 0;
+.orders img {
+  width: 25px;
+  margin-left: 10px;
 }

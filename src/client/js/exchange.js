@@ -24,6 +24,12 @@ function fetchBalances() {
   });
 }
 
+function fetchOrders() {
+  $.get( "/fetchOrders", function(data) {
+    console.log(data);
+  });
+}
+
 
 // Trading Box
 function highlightSelected(selectedOption) {
@@ -32,8 +38,6 @@ function highlightSelected(selectedOption) {
   selectedOption.find('input[type=radio]').attr('checked', isSelected);
 }
 
-
-
 function setListeners() {
   $('.js-update-balances').on('click', fetchBalances);
   $('.js-option').on('click', highlightSelected($(this)));
@@ -41,6 +45,7 @@ function setListeners() {
 
 ; (function init(){
   fetchBalances();
+  fetchOrders();
   fetchQuotes();
   setListeners();
 })();

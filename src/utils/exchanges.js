@@ -12,6 +12,10 @@ const fetchBalances = async () => {
   return await exchangeClient.fetchBalance();
 }
 
+const fetchOrders = async () => {
+  return await exchangeClient.fetchOrders('XRP/USDT');
+}
+
 const fetchQuotes = async () => {
   const btcQuote = await exchangeClient.fetchTicker('BTC/USDT');
   const btcPrice = btcQuote.bid;
@@ -31,5 +35,6 @@ const fetchQuotes = async () => {
 
 module.exports = {
   fetchBalances: fetchBalances,
+  fetchOrders: fetchOrders,
   fetchQuotes: fetchQuotes,
 }

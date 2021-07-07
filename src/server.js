@@ -23,6 +23,12 @@ app.get('/fetchBalances', (req, res) => {
   });
 });
 
+app.get('/fetchOrders', (req, res) => {
+  ccxt.fetchOrders().then(function(result){
+    res.json(result);
+  });
+});
+
 app.get('/fetchQuotes', (req, res) => {
   ccxt.fetchQuotes().then(function(result){
     res.json(result);

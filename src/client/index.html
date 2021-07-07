@@ -16,7 +16,9 @@
           <img src="img/logo.svg" alt="Logo" class="logo mr-2" />BinoBot
         </div>
         <div class="d-flex align-items-center">
-          <a href="#" class="js-update-balances update-balances">Actualizar</a>
+          <a href="#" class="js-update-balances update-balances">
+            <img class="reload" src="img/reload.png" />
+          </a>
         </div>
       </div>
       <div class="prices d-flex justify-content-center">
@@ -106,33 +108,8 @@
         </div>  
       </div>
 
-      <div class="orders mt-4">
-        <div class="d-flex align-items-center justify-content-between">
-          <h3 class="m-0">Orders</h3>
-          <div class="">
-            <div class="js-option option">
-              <p>Open</p>
-              <input type="radio" class="nw-cb" name="orders">
-            </div>
-            <div class="js-option option ml-2">
-              <p>Closed</p>
-              <input type="radio" class="nw-cb" name="orders">
-            </div>
-          </div>
-        </div>
-
-        <div class="js-open-orders d-flex justify-content-between">
-
-        </div>
-        <div class="js-closed-orders d-flex justify-content-between">
-
-        </div>
-
-      </div>
-
-
       <!-- Trade Box -->
-      <div class="trade-box mt-4">
+      <div class="trade-box mt-5">
         <h3>Trader Box</h3>
         <form>
           <div class="coins d-flex justify-content-between">
@@ -176,6 +153,55 @@
             <button type="submit">Create Order</label>
           </div>
         </form>
+      </div>
+
+      <!-- Orders -->
+      <div class="orders mt-5">
+        <div class="d-flex align-items-center justify-content-between">
+          <h3 class="m-0">Orders</h3>
+          <div class="">
+            <img src="img/bitcoin.png" />
+            <img src="img/ethereum.png" />
+            <img src="img/xrp.png" />
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-2">
+            <p class="m-0 font-weight-bold">Side</p>
+            <p class="m-0">Buy</p>
+          </div>
+          <div class="col-2">
+            <p class="m-0 font-weight-bold">type</p>
+            <p class="m-0">Buy</p>
+          </div>
+          <div class="col-2">
+            <p class="m-0 font-weight-bold">Amount</p>
+            <p class="m-0">Buy</p>
+          </div>
+          <div class="col-2">
+            <p class="m-0 font-weight-bold">Price</p>
+            <p class="m-0">Buy</p>
+          </div>
+          <div class="col-2">
+            <p class="m-0 font-weight-bold">Cost</p>
+            <p class="m-0">Buy</p>
+          </div>
+          <div class="col-2">
+            <p class="m-0 font-weight-bold">status</p>
+            <p class="m-0">Buy</p>
+          </div>
+        </div>
+
+        <div class="js-bitcoin-orders d-flex justify-content-between">
+          <div></div>
+        </div>
+        <div class="js-ethereum-orders d-flex justify-content-between">
+          <div></div>
+        </div>
+        <div class="js-xrp-orders d-flex justify-content-between">
+          <div></div>
+        </div>
       </div>
     </div>
 
