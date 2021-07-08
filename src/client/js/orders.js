@@ -1,8 +1,8 @@
-function createOrder(buySell, coin, amount, cost, price, date, marketLimit, limitPrice) {
+function createOrder(order, buySell, coin, amount, cost, price, date, marketLimit, limitPrice, id) {
   var orderTemplate = 
-  '<div class="order mt-3">' +
+  '<div class="order ' + buySell + ' mt-3">' +
     '<div class="d-flex">' +
-      '<img class="js=close-transaction close-transantcion m-0" src="img/cancel.png" />' +
+      '<img class="js-close-transaction close-transantcion m-0" src="img/cancel.png" />' +
       '<div class="order-img">' +
         '<img class="js-order-coin m-0" src="' + coin + '" />' +
       '</div>' +
@@ -24,13 +24,14 @@ function createOrder(buySell, coin, amount, cost, price, date, marketLimit, limi
         '<label class="js-order-date">' + date + '</label>' +
       '</div>' +
       '<div class="order-market-limit">' +
-        '<label class="js-order-market-limit">' + marketLimit + '</label>' +
+        '<label class="js-order-market-limit mr-2">' + marketLimit + '</label>' +
         '<label class="js-order-limit-price">$' + limitPrice + '</label>' +
       '</div>' +
+      '<label class="js-id d-none">' + id + '</label>' +
     '</div>' +
   '</div>';
 
-  $(buySell).append(orderTemplate);
+  $(order).append(orderTemplate);
 }
 
 
@@ -40,23 +41,79 @@ function fetchOrders() {
     const ethPic = 'img/ethereum.png';
     const xrpPic = 'img/xrp.png';
     
+
+    for (let i = 0; i < data.btcOrders.length; i++) {
+      if (data.btcOrders[i].status === 'open') $('.js-bitcoin-open-orders').html('<h3 class="m-0 mb-2">Open Orders</h3>');
+      if (data.btcOrders[i].status === 'closed') $('.js-bitcoin-closed-orders').html('<h3 class="m-0">Closed Orders</h3>');
+    }
+    
     for (let i = 0; i < data.btcOrders.length; i++) {
       if(data.btcOrders[i].status === 'open') {
-        var openOrders = $('.js-open-orders');
-        createOrder(openOrders, btcPic, data.btcOrders[i].amount, data.btcOrders[i].cost, data.btcOrders[i].price, data.btcOrders[i].datetime, data.btcOrders[i].type, data.btcOrders[i].price);
+        var openOrders = $('.js-bitcoin-open-orders');
+        createOrder(openOrders, data.btcOrders[i].side, btcPic, data.btcOrders[i].amount.toFixed(8), data.btcOrders[i].cost.toFixed(2), data.btcOrders[i].price.toFixed(0), data.btcOrders[i].datetime, data.btcOrders[i].type, data.btcOrders[i].price.toFixed(0), data.btcOrders[i].id);
       }
       if(data.btcOrders[i].status === 'closed') {
-        var closedOrders = $('.js-closed-orders');
-        createOrder(closedOrders, btcPic, data.btcOrders[i].amount, data.btcOrders[i].cost, data.btcOrders[i].price, data.btcOrders[i].datetime, data.btcOrders[i].type, data.btcOrders[i].price);
+        var closedOrders = $('.js-bitcoin-closed-orders');
+        createOrder(closedOrders, data.btcOrders[i].side, btcPic, data.btcOrders[i].amount.toFixed(8), data.btcOrders[i].cost.toFixed(2), data.btcOrders[i].price.toFixed(0), data.btcOrders[i].datetime, data.btcOrders[i].type, data.btcOrders[i].price.toFixed(0), data.btcOrders[i].id);
       }
     }
 
+
+    for (let i = 0; i < data.ethOrders.length; i++) {
+      if (data.ethOrders[i].status === 'open') $('.js-ethereum-open-orders').html('<h3 class="m-0 mb-2">Open Orders</h3>');
+      if (data.ethOrders[i].status === 'closed') $('.js-ethereum-closed-orders').html('<h3 class="m-0">Closed Orders</h3>');
+    }
     
+    for (let i = 0; i < data.ethOrders.length; i++) {
+      if(data.ethOrders[i].status === 'open') {
+        var openOrders = $('.js-ethereum-open-orders');
+        createOrder(openOrders, data.ethOrders[i].side, ethPic, data.ethOrders[i].amount.toFixed(5), data.ethOrders[i].cost.toFixed(2), data.ethOrders[i].price.toFixed(0), data.ethOrders[i].datetime, data.ethOrders[i].type, data.ethOrders[i].price.toFixed(0), data.ethOrders[i].id);
+      }
+      if(data.ethOrders[i].status === 'closed') {
+        var closedOrders = $('.js-ethereum-closed-orders');
+        createOrder(closedOrders, data.ethOrders[i].side, ethPic, data.ethOrders[i].amount.toFixed(5), data.ethOrders[i].cost.toFixed(2), data.ethOrders[i].price.toFixed(0), data.ethOrders[i].datetime, data.ethOrders[i].type, data.ethOrders[i].price.toFixed(0), data.ethOrders[i].id);
+      }
+    }
+
+    for (let i = 0; i < data.xrpOrders.length; i++) {
+      if (data.xrpOrders[i].status === 'open') $('.js-xrp-open-orders').html('<h3 class="m-0 mb-2">Open Orders</h3>');
+      if (data.xrpOrders[i].status === 'closed') $('.js-xrp-closed-orders').html('<h3 class="m-0">Closed Orders</h3>');
+    }
+
+    for (let i = 0; i < data.xrpOrders.length; i++) {
+      if(data.xrpOrders[i].status === 'open') {
+        var openOrders = $('.js-xrp-open-orders');
+        createOrder(openOrders, data.xrpOrders[i].side, xrpPic, data.xrpOrders[i].amount.toFixed(2), data.xrpOrders[i].cost.toFixed(2), data.xrpOrders[i].price.toFixed(0), data.xrpOrders[i].datetime, data.xrpOrders[i].type, data.xrpOrders[i].price.toFixed(0), data.xrpOrders[i].id);
+      }
+      if(data.xrpOrders[i].status === 'closed') {
+        var closedOrders = $('.js-xrp-closed-orders');
+        createOrder(closedOrders, data.xrpOrders[i].side, xrpPic, data.xrpOrders[i].amount.toFixed(2), data.xrpOrders[i].cost.toFixed(2), data.xrpOrders[i].price.toFixed(0), data.xrpOrders[i].datetime, data.xrpOrders[i].type, data.xrpOrders[i].price.toFixed(0), data.xrpOrders[i].id);
+      }
+    }
 
     console.log(data);
   });
 }
 
+function toggleOrders() {
+  $('.js-btc-tab').on('click', function() {
+    $('.js-bitcoin-orders').removeClass('d-none');
+    $('.js-ethereum-orders').addClass('d-none');
+    $('.js-xrp-orders').addClass('d-none');
+  });
+  $('.js-eth-tab').on('click', function() {
+    $('.js-bitcoin-orders').addClass('d-none');
+    $('.js-ethereum-orders').removeClass('d-none');
+    $('.js-xrp-orders').addClass('d-none');
+  });
+  $('.js-xrp-tab').on('click', function() {
+    $('.js-bitcoin-orders').addClass('d-none');
+    $('.js-ethereum-orders').addClass('d-none');
+    $('.js-xrp-orders').removeClass('d-none');
+  });
+}
+
 ; (function init() {
   fetchOrders();
+  toggleOrders();
 })();

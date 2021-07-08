@@ -160,67 +160,32 @@
         <div class="d-flex align-items-center justify-content-between mb-3">
           <h3 class="m-0">Orders</h3>
           <div class="">
-            <img src="img/bitcoin.png" />
-            <img src="img/ethereum.png" />
-            <img src="img/xrp.png" />
+            <img class="js-btc-tab tab-icon" src="img/bitcoin.png" />
+            <img class="js-eth-tab tab-icon" src="img/ethereum.png" />
+            <img class="js-xrp-tab tab-icon" src="img/xrp.png" />
           </div>
         </div>
 
-        
-
-        <div class="js-bitcoin-orders d-flex justify-content-between">
-          <div class="open-orders">
+        <div class="js-bitcoin-orders orders-tab">
+          <div class="js-bitcoin-open-orders">
           </div>
-          <div class="closed-orders">
+          <div class="js-bitcoin-closed-orders">
           </div>
         </div>
-        <div class="js-ethereum-orders">
-          <div class="open-orders">
-            <h3 class="m-0">Open Orders</h3>
-
-            <div class="order mt-3">
-              <div class="d-flex">
-                <img class="js=close-transaction close-transantcion m-0" src="img/cancel.png" />
-                <div class="order-img">
-                  <img class="js-order-coin m-0" src="img/bitcoin.png" />
-                </div>
-                <div class="order-amount">
-                  <p class="js-order-amount m-0">0.0000001</p>
-                  <label>Amount</label>
-                </div>
-                <div class="order-cost">
-                  <p class="js-order-cost m-0">$8,000</p>
-                  <label>Cost</label>
-                </div>
-                <div class="order-price">
-                  <p class="js-order-price m-0">$38,000</p>
-                  <label>Price</label>
-                </div>
-              </div>
-              <div class="d-flex mt-2">
-                <div class="order-data">
-                  <label class="js-order-date">2020-12-13 02:49:43</label>
-                </div>
-                <div class="order-market-limit">
-                  <label class="js-order-market-limit">Limit</label>
-                  <label class="js-order-limit-price">$38,000</label>
-                </div>
-              </div>
-            </div>
-
-
+        <div class="js-ethereum-orders orders-tab d-none">
+          <div class="js-ethereum-open-orders">
           </div>
-          <div class="closed-orders">
-            <h3 class="m-0">Closed Orders</h3>
+          <div class="js-ethereum-closed-orders">
           </div>
         </div>
-        <div class="js-xrp-orders d-flex justify-content-between">
-          <div class="js-open-orders open-orders">
+        <div class="js-xrp-orders orders-tab d-none">
+          <div class="js-xrp-open-orders">
           </div>
-          <div class="js-closed-orders closed-orders">
+          <div class="js-xrp-closed-orders">
           </div>
         </div>
       </div>
+
     </div>
 
 

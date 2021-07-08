@@ -172,7 +172,22 @@ nav .logo {
   position: relative;
   padding: 15px 6px 11px 0px;
   border-radius: 4px;
+}
+
+.order.buy {
+  background-color: rgba(0, 128, 38, 0.6);
+}
+
+.order.sell {
   background-color: rgb(128, 0, 0, 0.6);
+}
+
+.orders-tab {
+  transition: all 0.5s;
+}
+
+.tab-icon {
+  cursor: pointer;
 }
 
 .order p,
