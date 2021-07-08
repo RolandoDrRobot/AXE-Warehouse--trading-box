@@ -21,11 +21,6 @@
           </a>
         </div>
       </div>
-      <div class="prices d-flex justify-content-center">
-        <label><img class="coin" src="img/bitcoin.png" /> $<span class="js-btc-quote"></span></label>
-        <label><img class="coin" src="img/ethereum.png" /> $<span class="js-eth-quote"></span></label>
-        <label><img class="coin" src="img/xrp.png" /> $<span class="js-xrp-quote"></span></label>
-      </div>
     </nav>
 
     <div class="bot">
@@ -109,79 +104,88 @@
       </div>
 
       <!-- Trade Box -->
-      <div class="trade-box mt-5">
-        <h3 class="mb-3">Trader Box</h3>
-        <form>
-          <div class="coins d-flex justify-content-between">
-            <div class="js-option option">
-              <p>BTC</p>
-              <input type="radio" class="nw-cb" name="coin-to-trade">
-            </div>
-            <div class="js-option option">
-              <p>ETH</p>
-              <input type="radio" class="nw-cb" name="coin-to-trade">
-            </div>
-            <div class="js-option option">
-              <p>XRP</p>
-              <input type="radio" class="nw-cb" name="coin-to-trade">
-            </div>
+      <div class="trade-box">
+        <h3 class="wallet-option mb-1" data-toggle="collapse" href="#trade-box" role="button" aria-expanded="false" aria-controls="collapseExample">Trader Box</h3>
+        <div class="collapse" id="trade-box">
+          <div class="prices d-flex justify-content-center mb-3">
+            <label><img class="coin" src="img/bitcoin.png" /> $<span class="js-btc-quote"></span></label>
+            <label><img class="coin" src="img/ethereum.png" /> $<span class="js-eth-quote"></span></label>
+            <label><img class="coin" src="img/xrp.png" /> $<span class="js-xrp-quote"></span></label>
           </div>
-          <div class="transanction-type  d-flex justify-content-between">
-            <div class="js-option option">
-              <p>Market</p>
-              <input type="radio" class="nw-cb" name="operation-type">
+          <form>
+            <div class="coins d-flex justify-content-between">
+              <div class="js-option option">
+                <p>BTC</p>
+                <input type="radio" class="nw-cb" name="coin-to-trade">
+              </div>
+              <div class="js-option option">
+                <p>ETH</p>
+                <input type="radio" class="nw-cb" name="coin-to-trade">
+              </div>
+              <div class="js-option option">
+                <p>XRP</p>
+                <input type="radio" class="nw-cb" name="coin-to-trade">
+              </div>
             </div>
-            <div class="js-option option">
-              <p>Limit</p>
-              <input type="radio" class="nw-cb" name="operation-type">
+            <div class="transanction-type  d-flex justify-content-between">
+              <div class="js-option option">
+                <p>Market</p>
+                <input type="radio" class="nw-cb" name="operation-type">
+              </div>
+              <div class="js-option option">
+                <p>Limit</p>
+                <input type="radio" class="nw-cb" name="operation-type">
+              </div>
+              <div class="js-option option">
+                <p>Buy</p>
+                <input type="radio" class="nw-cb" name="buy-sell">
+              </div>
+              <div class="js-option option">
+                <p>Sell</p>
+                <input type="radio" class="nw-cb" name="buy-sell">
+              </div>
             </div>
-            <div class="js-option option">
-              <p>Buy</p>
-              <input type="radio" class="nw-cb" name="buy-sell">
+            <div class="amount d-flex align-items-center justify-content-between mb-3">
+              <input type="number" class="js-amount" placeholder="Coin Amount to trade" />
+              <label>$1,232</label>
             </div>
-            <div class="js-option option">
-              <p>Sell</p>
-              <input type="radio" class="nw-cb" name="buy-sell">
+            <div class="submit-order d-flex align-items-center justify-content-between">
+              <input type="text" class="js-price" placeholder="Price to buy/sell" />
+              <button type="submit">Create Order</label>
             </div>
-          </div>
-          <div class="amount d-flex align-items-center justify-content-between mb-3">
-            <input type="number" class="js-amount" placeholder="Coin Amount to trade" />
-            <label>$1,232</label>
-          </div>
-          <div class="submit-order d-flex align-items-center justify-content-between">
-            <input type="text" class="js-price" placeholder="Price to buy/sell" />
-            <button type="submit">Create Order</label>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
 
       <!-- Orders -->
-      <div class="orders mt-5">
-        <div class="d-flex align-items-center justify-content-between mb-3">
-          <h3 class="m-0">Orders</h3>
-          <div class="">
+      <div class="orders">
+        <div class="wallet-option d-flex align-items-center justify-content-between">
+          <h3 class="mb-1" data-toggle="collapse" href="#orders" role="button" aria-expanded="false" aria-controls="collapseExample">Orders</h3>
+          <div>
             <img class="js-btc-tab tab-icon" src="img/bitcoin.png" />
             <img class="js-eth-tab tab-icon" src="img/ethereum.png" />
             <img class="js-xrp-tab tab-icon" src="img/xrp.png" />
           </div>
         </div>
 
-        <div class="js-bitcoin-orders orders-tab">
-          <div class="js-bitcoin-open-orders">
+        <div class="collapse" id="orders">
+          <div class="js-bitcoin-orders orders-tab">
+            <div class="js-bitcoin-open-orders mt-3">
+            </div>
+            <div class="js-bitcoin-closed-orders mt-3">
+            </div>
           </div>
-          <div class="js-bitcoin-closed-orders">
+          <div class="js-ethereum-orders orders-tab d-none">
+            <div class="js-ethereum-open-orders mt-3">
+            </div>
+            <div class="js-ethereum-closed-orders mt-3">
+            </div>
           </div>
-        </div>
-        <div class="js-ethereum-orders orders-tab d-none">
-          <div class="js-ethereum-open-orders">
-          </div>
-          <div class="js-ethereum-closed-orders">
-          </div>
-        </div>
-        <div class="js-xrp-orders orders-tab d-none">
-          <div class="js-xrp-open-orders">
-          </div>
-          <div class="js-xrp-closed-orders">
+          <div class="js-xrp-orders orders-tab d-none">
+            <div class="js-xrp-open-orders mt-3">
+            </div>
+            <div class="js-xrp-closed-orders mt-3">
+            </div>
           </div>
         </div>
       </div>

@@ -47,7 +47,7 @@ nav .logo {
 }
 
 .prices {
-  margin-top: 8px;
+  margin: 13px 0 9px;
 }
 
 .prices label {
@@ -64,7 +64,7 @@ nav .logo {
 /* -------------------- */
 .bot {
   padding: 0 10px 15px;
-  margin: 130px 0 18px;
+  margin: 100px 0 18px;
 }
 
 .bot h3 {
@@ -94,9 +94,22 @@ nav .logo {
   width: 35px;
 }
 
+.wallet-option {
+  padding: 25px 15px 10px 0;
+  border-bottom: 1px solid #2a5557;
+}
+
 /* -----------------------
 /* --- Trade Box --- 
 /* -------------------- */
+.trade-box {
+  margin-top: 20px;
+}
+
+#trade-box {
+  height: 80vh;
+}
+
 .option {
   padding: 4px 0;
   border: 2px solid var(--main-bg-color);
@@ -203,7 +216,7 @@ nav .logo {
 }
 
 .orders img {
-  width: 25px;
+  width: 30px;
   margin-left: 10px;
 }
 
