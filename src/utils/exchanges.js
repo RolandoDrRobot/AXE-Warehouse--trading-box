@@ -42,8 +42,13 @@ const fetchQuotes = async () => {
   }
 }
 
+const cancelOrder = async (id) => {
+  return await exchangeClient.cancelOrder(id);
+}
+
 module.exports = {
   fetchBalances: fetchBalances,
   fetchOrders: fetchOrders,
   fetchQuotes: fetchQuotes,
+  cancelOrder: cancelOrder,
 }

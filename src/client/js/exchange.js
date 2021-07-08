@@ -24,7 +24,6 @@ function fetchBalances() {
   });
 }
 
-
 // Trading Box
 function highlightSelected(selectedOption) {
   selectedOption.toggleClass('option--selected');

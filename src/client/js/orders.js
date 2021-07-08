@@ -1,8 +1,9 @@
-function createOrder(order, buySell, coin, amount, cost, price, date, marketLimit, limitPrice, id) {
+function createOrder(order, buySell, coin, ticker, amount, cost, price, date, marketLimit, limitPrice, id, status) {
+  var cancelButton = status ? '<img class="js-close-order close-order m-0" src="img/cancel.png" />' : '';
   var orderTemplate = 
   '<div class="order ' + buySell + ' mt-3">' +
     '<div class="d-flex">' +
-      '<img class="js-close-transaction close-transantcion m-0" src="img/cancel.png" />' +
+        cancelButton +
       '<div class="order-img">' +
         '<img class="js-order-coin m-0" src="' + coin + '" />' +
       '</div>' +
@@ -27,13 +28,13 @@ function createOrder(order, buySell, coin, amount, cost, price, date, marketLimi
         '<label class="js-order-market-limit mr-2">' + marketLimit + '</label>' +
         '<label class="js-order-limit-price">$' + limitPrice + '</label>' +
       '</div>' +
-      '<label class="js-id d-none">' + id + '</label>' +
+      '<label class="js-order-id d-none">' + id + '</label>' +
+      '<label class="js-order-id d-none">' + ticker + '</label>' +
     '</div>' +
   '</div>';
 
   $(order).append(orderTemplate);
 }
-
 
 function fetchOrders() {
   $.get( "/fetchOrders", function(data) {
@@ -50,11 +51,11 @@ function fetchOrders() {
     for (let i = 0; i < data.btcOrders.length; i++) {
       if(data.btcOrders[i].status === 'open') {
         var openOrders = $('.js-bitcoin-open-orders');
-        createOrder(openOrders, data.btcOrders[i].side, btcPic, data.btcOrders[i].amount.toFixed(8), data.btcOrders[i].cost.toFixed(2), data.btcOrders[i].price.toFixed(0), data.btcOrders[i].datetime, data.btcOrders[i].type, data.btcOrders[i].price.toFixed(0), data.btcOrders[i].id);
+        createOrder(openOrders, data.btcOrders[i].side, btcPic, data.btcOrders[i].symbol, data.btcOrders[i].amount.toFixed(8), data.btcOrders[i].cost.toFixed(2), data.btcOrders[i].price.toFixed(0), data.btcOrders[i].datetime, data.btcOrders[i].type, data.btcOrders[i].price.toFixed(0), data.btcOrders[i].id, data.btcOrders[i].status);
       }
       if(data.btcOrders[i].status === 'closed') {
         var closedOrders = $('.js-bitcoin-closed-orders');
-        createOrder(closedOrders, data.btcOrders[i].side, btcPic, data.btcOrders[i].amount.toFixed(8), data.btcOrders[i].cost.toFixed(2), data.btcOrders[i].price.toFixed(0), data.btcOrders[i].datetime, data.btcOrders[i].type, data.btcOrders[i].price.toFixed(0), data.btcOrders[i].id);
+        createOrder(closedOrders, data.btcOrders[i].side, btcPic, data.btcOrders[i].symbol, data.btcOrders[i].amount.toFixed(8), data.btcOrders[i].cost.toFixed(2), data.btcOrders[i].price.toFixed(0), data.btcOrders[i].datetime, data.btcOrders[i].type, data.btcOrders[i].price.toFixed(0), data.btcOrders[i].id);
       }
     }
 
@@ -67,11 +68,11 @@ function fetchOrders() {
     for (let i = 0; i < data.ethOrders.length; i++) {
       if(data.ethOrders[i].status === 'open') {
         var openOrders = $('.js-ethereum-open-orders');
-        createOrder(openOrders, data.ethOrders[i].side, ethPic, data.ethOrders[i].amount.toFixed(5), data.ethOrders[i].cost.toFixed(2), data.ethOrders[i].price.toFixed(0), data.ethOrders[i].datetime, data.ethOrders[i].type, data.ethOrders[i].price.toFixed(0), data.ethOrders[i].id);
+        createOrder(openOrders, data.ethOrders[i].side, ethPic, data.ethOrders[i].symbol, data.ethOrders[i].amount.toFixed(5), data.ethOrders[i].cost.toFixed(2), data.ethOrders[i].price.toFixed(0), data.ethOrders[i].datetime, data.ethOrders[i].type, data.ethOrders[i].price.toFixed(0), data.ethOrders[i].id, data.btcOrders[i].status);
       }
       if(data.ethOrders[i].status === 'closed') {
         var closedOrders = $('.js-ethereum-closed-orders');
-        createOrder(closedOrders, data.ethOrders[i].side, ethPic, data.ethOrders[i].amount.toFixed(5), data.ethOrders[i].cost.toFixed(2), data.ethOrders[i].price.toFixed(0), data.ethOrders[i].datetime, data.ethOrders[i].type, data.ethOrders[i].price.toFixed(0), data.ethOrders[i].id);
+        createOrder(closedOrders, data.ethOrders[i].side, ethPic, data.ethOrders[i].symbol, data.ethOrders[i].amount.toFixed(5), data.ethOrders[i].cost.toFixed(2), data.ethOrders[i].price.toFixed(0), data.ethOrders[i].datetime, data.ethOrders[i].type, data.ethOrders[i].price.toFixed(0), data.ethOrders[i].id);
       }
     }
 
@@ -83,15 +84,27 @@ function fetchOrders() {
     for (let i = 0; i < data.xrpOrders.length; i++) {
       if(data.xrpOrders[i].status === 'open') {
         var openOrders = $('.js-xrp-open-orders');
-        createOrder(openOrders, data.xrpOrders[i].side, xrpPic, data.xrpOrders[i].amount.toFixed(2), data.xrpOrders[i].cost.toFixed(2), data.xrpOrders[i].price.toFixed(0), data.xrpOrders[i].datetime, data.xrpOrders[i].type, data.xrpOrders[i].price.toFixed(0), data.xrpOrders[i].id);
+        createOrder(openOrders, data.xrpOrders[i].side, xrpPic, data.xrpOrders[i].symbol, data.xrpOrders[i].amount.toFixed(2), data.xrpOrders[i].cost.toFixed(2), data.xrpOrders[i].price.toFixed(0), data.xrpOrders[i].datetime, data.xrpOrders[i].type, data.xrpOrders[i].price.toFixed(0), data.xrpOrders[i].id, data.btcOrders[i].status);
       }
       if(data.xrpOrders[i].status === 'closed') {
         var closedOrders = $('.js-xrp-closed-orders');
-        createOrder(closedOrders, data.xrpOrders[i].side, xrpPic, data.xrpOrders[i].amount.toFixed(2), data.xrpOrders[i].cost.toFixed(2), data.xrpOrders[i].price.toFixed(0), data.xrpOrders[i].datetime, data.xrpOrders[i].type, data.xrpOrders[i].price.toFixed(0), data.xrpOrders[i].id);
+        createOrder(closedOrders, data.xrpOrders[i].side, xrpPic, data.xrpOrders[i].symbol, data.xrpOrders[i].amount.toFixed(2), data.xrpOrders[i].cost.toFixed(2), data.xrpOrders[i].price.toFixed(0), data.xrpOrders[i].datetime, data.xrpOrders[i].type, data.xrpOrders[i].price.toFixed(0), data.xrpOrders[i].id);
       }
     }
-
-    console.log(data);
+  }).done(function() {
+    $('.js-close-order').on('click', function() {
+      var data = {
+        id: $(this).find('.js-order-id').val(),
+        ticker: $(this).find('.js-order-id').val()
+      }
+      var success = console.log($(this));
+      $.ajax({
+        type: 'POST',
+        url: '/cancelOrder',
+        data: data,
+        success: success
+      });
+    });
   });
 }
 

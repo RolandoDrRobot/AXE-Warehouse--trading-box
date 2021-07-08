@@ -23,6 +23,10 @@ app.get('/fetchBalances', (req, res) => {
   });
 });
 
+app.post('/cancelOrder', (req, res) => {
+  ccxt.cancelOrder(req.body.id, req.body.ticker);
+});
+
 app.get('/fetchOrders', (req, res) => {
   ccxt.fetchOrders().then(function(result){
     res.json(result);
