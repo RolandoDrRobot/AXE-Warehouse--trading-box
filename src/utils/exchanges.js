@@ -42,8 +42,8 @@ const fetchQuotes = async () => {
   }
 }
 
-const cancelOrder = async (id) => {
-  return await exchangeClient.cancelOrder(id);
+const cancelOrder = async (id, symbol) => {
+  return await exchangeClient.cancelOrder(id, symbol);
 }
 
 module.exports = {

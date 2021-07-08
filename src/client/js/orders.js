@@ -4,6 +4,8 @@ function createOrder(order, buySell, coin, ticker, amount, cost, price, date, ma
   '<div class="order ' + buySell + ' mt-3">' +
     '<div class="d-flex">' +
         cancelButton +
+      '<label class="js-order-ticker d-none">' + ticker + '</label>' +
+      '<label class="js-order-id d-none">' + id + '</label>' +
       '<div class="order-img">' +
         '<img class="js-order-coin m-0" src="' + coin + '" />' +
       '</div>' +
@@ -28,8 +30,8 @@ function createOrder(order, buySell, coin, ticker, amount, cost, price, date, ma
         '<label class="js-order-market-limit mr-2">' + marketLimit + '</label>' +
         '<label class="js-order-limit-price">$' + limitPrice + '</label>' +
       '</div>' +
-      '<label class="js-order-id d-none">' + id + '</label>' +
-      '<label class="js-order-id d-none">' + ticker + '</label>' +
+      
+      
     '</div>' +
   '</div>';
 
@@ -94,15 +96,15 @@ function fetchOrders() {
   }).done(function() {
     $('.js-close-order').on('click', function() {
       var data = {
-        id: $(this).find('.js-order-id').val(),
-        ticker: $(this).find('.js-order-id').val()
+        id: $($('.' + $(this).attr('class').split(' ')[0] + ' + .js-order-ticker + .js-order-id')[0]).text(),
+        ticker: $($('.' + $(this).attr('class').split(' ')[0] + ' + .js-order-ticker')[0]).text()
       }
-      var success = console.log($(this));
+      var success = console.log('I am back bro');
       $.ajax({
         type: 'POST',
         url: '/cancelOrder',
         data: data,
-        success: success
+        success: success,
       });
     });
   });
