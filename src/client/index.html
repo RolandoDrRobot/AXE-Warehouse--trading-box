@@ -29,7 +29,7 @@
     </nav>
 
     <div class="bot">
-      <div class="headline d-flex align-items-center justify-content-between">
+      <div class="headline d-flex align-items-center justify-content-between mb-3">
         <h3 class="m-0">Wallet</h3>
         <h3 class="js-bot-name d-inline m-0"></h3>
       </div>
@@ -110,7 +110,7 @@
 
       <!-- Trade Box -->
       <div class="trade-box mt-5">
-        <h3>Trader Box</h3>
+        <h3 class="mb-3">Trader Box</h3>
         <form>
           <div class="coins d-flex justify-content-between">
             <div class="js-option option">
@@ -157,7 +157,7 @@
 
       <!-- Orders -->
       <div class="orders mt-5">
-        <div class="d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center justify-content-between mb-3">
           <h3 class="m-0">Orders</h3>
           <div class="">
             <img src="img/bitcoin.png" />
@@ -166,41 +166,59 @@
           </div>
         </div>
 
-        <div class="row mt-3">
-          <div class="col-2">
-            <p class="m-0 font-weight-bold">Side</p>
-            <p class="m-0">Buy</p>
-          </div>
-          <div class="col-2">
-            <p class="m-0 font-weight-bold">type</p>
-            <p class="m-0">Buy</p>
-          </div>
-          <div class="col-2">
-            <p class="m-0 font-weight-bold">Amount</p>
-            <p class="m-0">Buy</p>
-          </div>
-          <div class="col-2">
-            <p class="m-0 font-weight-bold">Price</p>
-            <p class="m-0">Buy</p>
-          </div>
-          <div class="col-2">
-            <p class="m-0 font-weight-bold">Cost</p>
-            <p class="m-0">Buy</p>
-          </div>
-          <div class="col-2">
-            <p class="m-0 font-weight-bold">status</p>
-            <p class="m-0">Buy</p>
-          </div>
-        </div>
+        
 
         <div class="js-bitcoin-orders d-flex justify-content-between">
-          <div></div>
+          <div class="open-orders">
+          </div>
+          <div class="closed-orders">
+          </div>
         </div>
-        <div class="js-ethereum-orders d-flex justify-content-between">
-          <div></div>
+        <div class="js-ethereum-orders">
+          <div class="open-orders">
+            <h3 class="m-0">Open Orders</h3>
+
+            <div class="order mt-3">
+              <div class="d-flex">
+                <img class="js=close-transaction close-transantcion m-0" src="img/cancel.png" />
+                <div class="order-img">
+                  <img class="js-order-coin m-0" src="img/bitcoin.png" />
+                </div>
+                <div class="order-amount">
+                  <p class="js-order-amount m-0">0.0000001</p>
+                  <label>Amount</label>
+                </div>
+                <div class="order-cost">
+                  <p class="js-order-cost m-0">$8,000</p>
+                  <label>Cost</label>
+                </div>
+                <div class="order-price">
+                  <p class="js-order-price m-0">$38,000</p>
+                  <label>Price</label>
+                </div>
+              </div>
+              <div class="d-flex mt-2">
+                <div class="order-data">
+                  <label class="js-order-date">2020-12-13 02:49:43</label>
+                </div>
+                <div class="order-market-limit">
+                  <label class="js-order-market-limit">Limit</label>
+                  <label class="js-order-limit-price">$38,000</label>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="closed-orders">
+            <h3 class="m-0">Closed Orders</h3>
+          </div>
         </div>
         <div class="js-xrp-orders d-flex justify-content-between">
-          <div></div>
+          <div class="js-open-orders open-orders">
+          </div>
+          <div class="js-closed-orders closed-orders">
+          </div>
         </div>
       </div>
     </div>
@@ -209,5 +227,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <script src="./js/exchange.js"></script>
+    <script src="./js/orders.js"></script>
   </body>
 </html>

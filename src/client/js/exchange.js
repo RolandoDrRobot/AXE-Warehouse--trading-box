@@ -24,11 +24,6 @@ function fetchBalances() {
   });
 }
 
-function fetchOrders() {
-  $.get( "/fetchOrders", function(data) {
-    console.log(data);
-  });
-}
 
 
 // Trading Box
@@ -45,7 +40,6 @@ function setListeners() {
 
 ; (function init(){
   fetchBalances();
-  fetchOrders();
   fetchQuotes();
   setListeners();
 })();

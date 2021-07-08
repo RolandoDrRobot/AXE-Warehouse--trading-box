@@ -13,7 +13,16 @@ const fetchBalances = async () => {
 }
 
 const fetchOrders = async () => {
-  return await exchangeClient.fetchOrders('XRP/USDT');
+  
+  const btcOrders = await exchangeClient.fetchOrders('BTC/USDT');
+  const ethOrders = await exchangeClient.fetchOrders('ETH/USDT');
+  const xrpOrders = await exchangeClient.fetchOrders('XRP/USDT');
+
+  return {
+    btcOrders: btcOrders,
+    ethOrders: ethOrders,
+    xrpOrders: xrpOrders,
+  }
 }
 
 const fetchQuotes = async () => {

@@ -76,7 +76,7 @@ nav .logo {
 }
 
 .bot img {
-  width: 30px;
+  width: 25px;
 }
 
 .bot label {
@@ -168,7 +168,45 @@ nav .logo {
 /* --- Orders --- 
 /* -------------------- */
 
+.order {
+  position: relative;
+  padding: 15px 6px 11px 0px;
+  border-radius: 4px;
+  background-color: rgb(128, 0, 0, 0.6);
+}
+
+.order p,
+.order label {
+  font-size: 14px;
+}
+
+.close-transantcion {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 21px !important;
+}
+
 .orders img {
   width: 25px;
   margin-left: 10px;
+}
+
+.order-img {
+  width: 22%;
+  text-align: center;
+}
+
+.order-amount,
+.order-cost,
+.order-price {
+  font-size: 14px;
+  text-align: center;
+  width: 26%;
+}
+
+.order-data,
+.order-market-limit {
+  text-align: center;
+  width: 50%;
 }
