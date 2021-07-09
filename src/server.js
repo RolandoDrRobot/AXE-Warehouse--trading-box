@@ -25,10 +25,6 @@ app.get('/fetchBalances', (req, res) => {
   });
 });
 
-app.post('/cancelOrder', (req, res) => {
-  ccxt.cancelOrder(req.body.id, req.body.ticker);
-});
-
 app.get('/fetchOrders', (req, res) => {
   ccxt.fetchOrders().then(function(result){
     res.json(result);
@@ -39,4 +35,12 @@ app.get('/fetchQuotes', (req, res) => {
   ccxt.fetchQuotes().then(function(result){
     res.json(result);
   });
+});
+
+app.post('/createOrder', (req, res) => {
+  ccxt.createOrder(req.body.symbol, req.body.type, req.body.side, req.body.amount, req.body.price);
+});
+
+app.post('/cancelOrder', (req, res) => {
+  ccxt.createOrder(req.body.id, req.body.ticker);
 });

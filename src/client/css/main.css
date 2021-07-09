@@ -126,7 +126,7 @@ nav .logo {
 .option--selected,
 .option:hover p,
 .option--selected p {
-  color: var(--dark-tourquese);
+  color: var(--dark-tourquese) !important;
   background-color: #fff;
 }
 
@@ -140,8 +140,8 @@ nav .logo {
 }
 
 .option input[type=radio] {
-  position: absolute;
-  visibility: hidden;
+  position: relative;
+  top: 2px;
 }
 
 .coins .option {
