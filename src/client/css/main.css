@@ -20,7 +20,8 @@ body {
 
 label,
 p {
-  font-size: 12px;
+  font-size: 15px;
+  font-weight: bold;
   line-height: 1;
   margin: 0;
 }
@@ -79,8 +80,13 @@ nav .logo {
   width: 25px;
 }
 
-.bot label {
-  font-size: 10px;
+.tourquese {
+  color: var(--normal-tourquese);
+}
+
+.bot .label {
+  font-weight: normal;
+  font-size: 12px;
 }
 
 .currency {
