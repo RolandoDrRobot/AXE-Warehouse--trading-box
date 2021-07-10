@@ -169,7 +169,7 @@ nav .logo {
   width: 38%;
 }
 
-.submit-order button {
+.submit-order .submit-btn {
   font-weight: 600;
   padding: 5px 0;
   border: 0;

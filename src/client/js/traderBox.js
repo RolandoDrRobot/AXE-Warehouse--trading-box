@@ -21,23 +21,25 @@ $('.js-option').on('click', function() {
   }
 });
 
-function createOrder() {
+
+
+$('.js-create-order').on('click', function(e) {
   var symbol = '';
   var type = '';
   var side = '';
-  var amount = $('#newOrder .js-amount').val();
-  var price = $('#newOrder .js-price').val() || '';
+  var amount = parseFloat($('#newOrder .js-amount').val());
+  var price = 0
 
   if ($('.js-btc-trade').attr('checked')) symbol = $('.js-btc-trade').val();
-  if ($('.js-eth-trade').attr('checked')) symbol = $('.js-btc-trade').val();
-  if ($('.js-xrp-trade').attr('checked')) symbol = $('.js-btc-trade').val();
-  if ($('.js-market-trade').attr('checked')) type = $('.js-btc-trade').val();
-  if ($('.js-limit-trade').attr('checked')) type = $('.js-btc-trade').val();
-  if ($('.js-buy-trade').attr('checked')) side = $('.js-btc-trade').val();
-  if ($('.js-sell-trade').attr('checked')) side = $('.js-btc-trade').val();
+  if ($('.js-eth-trade').attr('checked')) symbol = $('.js-eth-trade').val();
+  if ($('.js-xrp-trade').attr('checked')) symbol = $('.js-xrp-trade').val();
+  if ($('.js-market-trade').attr('checked')) type = 'market';
+  if ($('.js-limit-trade').attr('checked')) type = 'limit';
+  if ($('.js-buy-trade').attr('checked')) side = 'buy';
+  if ($('.js-sell-trade').attr('checked')) side = 'sell';
   if (symbol == 'BTC/USDT') price = $('.js-btc-quote').text();
-  if (symbol == 'ETH/USDT') price = $('.js-eth-quote').val();
-  if (symbol == 'XRP/USDT') price = $('.js-xrp-quote').val();
+  if (symbol == 'ETH/USDT') price = $('.js-eth-quote').text();
+  if (symbol == 'XRP/USDT') price = $('.js-xrp-quote').text();
 
   var data = {
     symbol : symbol,
@@ -54,9 +56,4 @@ function createOrder() {
     data: data,
     success: success,
   });
-}
-
-$('.js-create-order').on('click', function(e) {
-  e.preventDefault();
-  createOrder();
 });
