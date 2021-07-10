@@ -41,6 +41,8 @@ $('.js-create-order').on('click', function(e) {
   if (symbol == 'ETH/USDT') price = $('.js-eth-quote').text();
   if (symbol == 'XRP/USDT') price = $('.js-xrp-quote').text();
 
+
+  $('.js-order-result').html('');
   if (symbol == "") {
     var img = '<img src="img/warning.png" class="mr-2">';
     var msg = 'Please select a coin'
@@ -48,7 +50,6 @@ $('.js-create-order').on('click', function(e) {
     $('.js-order-result').addClass('error');
     return
   }
-
   if (type == "") {
     var img = '<img src="img/warning.png" class="mr-2">';
     var msg = 'Please select either market or limit'
@@ -56,7 +57,6 @@ $('.js-create-order').on('click', function(e) {
     $('.js-order-result').addClass('error');
     return
   }
-
   if (side == "") {
     var img = '<img src="img/warning.png" class="mr-2">';
     var msg = 'Please select either buy or sell'
@@ -64,7 +64,6 @@ $('.js-create-order').on('click', function(e) {
     $('.js-order-result').addClass('error');
     return
   }
-
   if (amount == "") {
     var img = '<img src="img/warning.png" class="mr-2">';
     var msg = 'Please type the amount'
@@ -81,11 +80,17 @@ $('.js-create-order').on('click', function(e) {
     price : price,
   }
 
-  var success = console.log('I am back bro');
+  var success = {
+    render: function() {
+      $('.js-order-result').html('<img src="img/checked.png" class="mr-2">Order created Succesfully');
+      $('.js-order-result').addClass('success');
+    }
+  }
+
   $.ajax({
     type: 'POST',
     url: '/createOrder',
     data: data,
-    success: success,
+    success: success.render(),
   });
 });

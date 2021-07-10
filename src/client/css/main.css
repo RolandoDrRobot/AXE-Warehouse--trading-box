@@ -213,9 +213,15 @@ nav .logo {
 }
 
 .order-result.error {
-  border: 2px solid #940a16;
-  background: #310307;
+  border: 2px solid rgb(128, 0, 0, 0.6);
+  background: rgb(84, 1, 1, 1);
 }
+
+.order-result.success {
+  border: 2px solid rgba(0, 128, 38, 0.6);
+  background: rgba(0, 76, 23, 1);
+}
+
 
 /* -----------------------
 /* --- Orders --- 
