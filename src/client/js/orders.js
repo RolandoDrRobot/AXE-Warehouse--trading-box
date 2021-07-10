@@ -12,13 +12,15 @@ function createDate(timestamp) {
 }
 
 function createOrder(order, buySell, coin, ticker, amount, cost, price, date, marketLimit, limitPrice, id, status) {
-  var cancelButton = status ? '<img class="js-close-order close-order m-0" src="img/cancel.png" />' : '';
+  var cancelButton = status ? '<img class="m-0" src="img/cancel.png" />' : '';
   var orderTemplate = 
   '<div class="order ' + buySell + ' mt-3">' +
     '<div class="d-flex">' +
+      '<div class="js-close-order close-order">' +
         cancelButton +
-      '<label class="js-order-ticker d-none">' + ticker + '</label>' +
-      '<label class="js-order-id d-none">' + id + '</label>' +
+        '<label class="js-order-ticker d-none">' + ticker + '</label>' +
+        '<label class="js-order-id d-none">' + id + '</label>' +
+      '</div>' +
       '<div class="order-img">' +
         '<img class="js-order-coin m-0" src="' + coin + '" />' +
       '</div>' +
@@ -110,15 +112,14 @@ function fetchOrders() {
   }).done(function() {
     $('.js-close-order').on('click', function() {
       var data = {
-        id: $($('.' + $(this).attr('class').split(' ')[0] + ' + .js-order-ticker + .js-order-id')[0]).text(),
-        ticker: $($('.' + $(this).attr('class').split(' ')[0] + ' + .js-order-ticker')[0]).text()
+        id: $(this).find('.js-order-id').text(),
+        ticker: $(this).find('.js-order-ticker').text(),
       }
-      var success = console.log('I am back bro');
       $.ajax({
         type: 'POST',
         url: '/cancelOrder',
         data: data,
-        success: success,
+        success: location.reload(),
       });
     });
   });

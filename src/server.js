@@ -42,5 +42,5 @@ app.post('/createOrder', (req, res) => {
 });
 
 app.post('/cancelOrder', (req, res) => {
-  ccxt.createOrder(req.body.id, req.body.ticker);
+  ccxt.cancelOrder(req.body.id, req.body.ticker);
 });
