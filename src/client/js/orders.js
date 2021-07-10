@@ -61,7 +61,8 @@ function fetchOrders() {
       if (data.btcOrders[i].status === 'closed') $('.js-bitcoin-closed-orders').html('<h3 class="m-0">Closed Orders</h3>');
     }
     
-    for (let i = 0; i < data.btcOrders.length; i++) {
+    var orderedBtcOrders = data.btcOrders.reverse();
+    for (let i = 0; i < orderedBtcOrders.length; i++) {
       if(data.btcOrders[i].status === 'open') {
         var openOrders = $('.js-bitcoin-open-orders');
         createOrder(openOrders, data.btcOrders[i].side, btcPic, data.btcOrders[i].symbol, data.btcOrders[i].amount.toFixed(5), data.btcOrders[i].cost.toFixed(2), data.btcOrders[i].price.toFixed(0), createDate(data.btcOrders[i].timestamp), data.btcOrders[i].type, data.btcOrders[i].price.toFixed(0), data.btcOrders[i].id, data.btcOrders[i].status);
@@ -78,7 +79,8 @@ function fetchOrders() {
       if (data.ethOrders[i].status === 'closed') $('.js-ethereum-closed-orders').html('<h3 class="m-0">Closed Orders</h3>');
     }
     
-    for (let i = 0; i < data.ethOrders.length; i++) {
+    var orderedEthOrders = data.ethOrders.reverse();
+    for (let i = 0; i < orderedEthOrders.length; i++) {
       if(data.ethOrders[i].status === 'open') {
         var openOrders = $('.js-ethereum-open-orders');
         createOrder(openOrders, data.ethOrders[i].side, ethPic, data.ethOrders[i].symbol, data.ethOrders[i].amount.toFixed(5), data.ethOrders[i].cost.toFixed(2), data.ethOrders[i].price.toFixed(0), createDate(data.ethOrders[i].timestamp), data.ethOrders[i].type, data.ethOrders[i].price.toFixed(0), data.ethOrders[i].id, data.btcOrders[i].status);
@@ -94,14 +96,15 @@ function fetchOrders() {
       if (data.xrpOrders[i].status === 'closed') $('.js-xrp-closed-orders').html('<h3 class="m-0">Closed Orders</h3>');
     }
 
-    for (let i = 0; i < data.xrpOrders.length; i++) {
+    var orderedXrpOrders = data.xrpOrders.reverse();
+    for (let i = 0; i < orderedXrpOrders.length; i++) {
       if(data.xrpOrders[i].status === 'open') {
         var openOrders = $('.js-xrp-open-orders');
-        createOrder(openOrders, data.xrpOrders[i].side, xrpPic, data.xrpOrders[i].symbol, data.xrpOrders[i].amount.toFixed(2), data.xrpOrders[i].cost.toFixed(2), data.xrpOrders[i].price.toFixed(0), createDate(data.xrpOrders[i].timestamp), data.xrpOrders[i].type, data.xrpOrders[i].price.toFixed(2), data.xrpOrders[i].id, data.btcOrders[i].status);
+        createOrder(openOrders, data.xrpOrders[i].side, xrpPic, data.xrpOrders[i].symbol, data.xrpOrders[i].amount.toFixed(2), data.xrpOrders[i].cost.toFixed(2), data.xrpOrders[i].price.toFixed(2), createDate(data.xrpOrders[i].timestamp), data.xrpOrders[i].type, data.xrpOrders[i].price.toFixed(2), data.xrpOrders[i].id, data.btcOrders[i].status);
       }
       if(data.xrpOrders[i].status === 'closed') {
         var closedOrders = $('.js-xrp-closed-orders');
-        createOrder(closedOrders, data.xrpOrders[i].side, xrpPic, data.xrpOrders[i].symbol, data.xrpOrders[i].amount.toFixed(2), data.xrpOrders[i].cost.toFixed(2), data.xrpOrders[i].price.toFixed(0), createDate(data.xrpOrders[i].timestamp), data.xrpOrders[i].type, data.xrpOrders[i].price.toFixed(2), data.xrpOrders[i].id);
+        createOrder(closedOrders, data.xrpOrders[i].side, xrpPic, data.xrpOrders[i].symbol, data.xrpOrders[i].amount.toFixed(2), data.xrpOrders[i].cost.toFixed(2), data.xrpOrders[i].price.toFixed(2), createDate(data.xrpOrders[i].timestamp), data.xrpOrders[i].type, data.xrpOrders[i].price.toFixed(2), data.xrpOrders[i].id);
       }
     }
   }).done(function() {
