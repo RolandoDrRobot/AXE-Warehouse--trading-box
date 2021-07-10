@@ -8,7 +8,7 @@ function createDate(timestamp) {
     minute: dateObj.getMinutes(),
     second: dateObj.getSeconds(),
   };
-  return  date.hour + ':' + date.minute + ':' + date.second + '<br>' + date.day + '/' + date.month + '/' + date.year;
+  return  date.hour + ':' + date.minute + ':' + date.second + ' - ' + date.day + '/' + date.month + '/' + date.year;
 }
 
 function createOrder(order, buySell, coin, ticker, amount, cost, price, date, marketLimit, limitPrice, id, status) {

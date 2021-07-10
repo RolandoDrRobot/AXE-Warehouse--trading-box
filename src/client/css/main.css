@@ -234,8 +234,12 @@ nav .logo {
   width: 26%;
 }
 
-.order-data,
-.order-market-limit {
+.order-data {
   text-align: center;
   width: 50%;
+}
+
+.order-market-limit {
+  text-align: center;
+  width: 39%;
 }
