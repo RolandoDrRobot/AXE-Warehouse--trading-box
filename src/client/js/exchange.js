@@ -12,9 +12,9 @@ function fetchBalances() {
     $('.js-usdt-total').html('$ ' + data.USDT.total.toFixed(2));
     $('.js-usdt-used').html('$ ' + data.USDT.used.toFixed(2));
     $('.js-usdt-avaliable').html('$ ' + data.USDT.free.toFixed(2));
-    $('.js-btc-total').html(data.BTC.total.toFixed(8));
-    $('.js-btc-used').html(data.BTC.used.toFixed(8));
-    $('.js-btc-avaliable').html(data.BTC.free.toFixed(8));
+    $('.js-btc-total').html(data.BTC.total.toFixed(5));
+    $('.js-btc-used').html(data.BTC.used.toFixed(5));
+    $('.js-btc-avaliable').html(data.BTC.free.toFixed(5));
     $('.js-eth-total').html(data.ETH.total.toFixed(5));
     $('.js-eth-used').html(data.ETH.used.toFixed(5));
     $('.js-eth-avaliable').html(data.ETH.free.toFixed(5));
@@ -39,5 +39,4 @@ function fetchBalances() {
 ; (function init(){
   fetchBalances();
   fetchQuotes();
-  setListeners();
 })();

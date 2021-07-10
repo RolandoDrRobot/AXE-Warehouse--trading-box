@@ -20,7 +20,7 @@ body {
 
 label,
 p {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: bold;
   line-height: 1;
   margin: 0;
@@ -207,11 +207,6 @@ nav .logo {
 
 .tab-icon {
   cursor: pointer;
-}
-
-.order p,
-.order label {
-  font-size: 14px;
 }
 
 .close-order {
