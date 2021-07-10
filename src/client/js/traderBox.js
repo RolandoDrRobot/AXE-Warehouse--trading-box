@@ -1,15 +1,24 @@
 // Trading Box
-function highlightSelected(selectedOption) {
-  if($(selectedOption).find('input[type=radio]').attr('checked')) {
-    $(selectedOption).addClass('option--selected');
-  }
-  else {
-    $(selectedOption).removeClass('option--selected');
-  }
-}
+// $('.js-option').on('click', function() {
+//   $(this).toggleClass('option--selected');
+//   var isSelected = $(this).hasClass('option--selected');
+//   $(this).find('input[type=radio]').attr('checked', isSelected);
+// });
 
 $('.js-option').on('click', function() {
-  highlightSelected(this);
+  var options = $('[name="' + $(this).find('input[type=radio]').attr("name") + '"]');
+  for (let i = 0; i < options.length; i++) {
+    $(options[i]).attr('checked', false);
+  }
+  $(this).find('input[type=radio]').attr('checked', true);
+
+  var optionsBoxes = $('.js-option');
+  for (let i = 0; i < optionsBoxes.length; i++) {
+    $(optionsBoxes[i]).removeClass('option--selected');
+    if ($(optionsBoxes[i]).has($(optionsBoxes[i]).find('input[type=radio]:checked')).length !== 0) {
+      $(optionsBoxes[i]).addClass('option--selected');
+    }
+  }
 });
 
 function createOrder() {
@@ -37,9 +46,6 @@ function createOrder() {
     amount : amount,
     price : price,
   }
-
-  console.log(data);
-  debugger
 
   var success = console.log('I am back bro');
   $.ajax({

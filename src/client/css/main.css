@@ -140,8 +140,8 @@ nav .logo {
 }
 
 .option input[type=radio] {
-  position: relative;
-  top: 2px;
+  position: absolute;
+  visibility: hidden;
 }
 
 .coins .option {
