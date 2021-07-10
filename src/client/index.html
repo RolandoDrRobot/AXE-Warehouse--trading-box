@@ -145,22 +145,24 @@
                 <input type="radio" class="js-limit-trade nw-cb" name="operation-type" value="limit">
                 <p>Limit</p>
               </div>
-              <div class="js-option option">
+              <div class="js-option option buy">
                 <input type="radio" class="js-buy-trade nw-cb" name="buy-sell" value="buy">
                 <p>Buy</p>
               </div>
-              <div class="js-option option">
+              <div class="js-option option sell">
                 <input type="radio" class="js-sell-trade nw-cb" name="buy-sell" value="sell">
                 <p>Sell</p>
               </div>
             </div>
             <div class="amount d-flex align-items-center justify-content-between mb-3">
               <input type="number" class="js-amount" placeholder="Coin Amount to trade" />
-              <label>$1,232</label>
+              <p class="estimaded-order">$1,232</p>
             </div>
             <div class="submit-order d-flex align-items-center justify-content-between">
               <input type="text" class="js-price" placeholder="Price to buy/sell" />
-              <p class="js-create-order submit-btn">Create Order</p>
+              <div class="js-create-order submit-btn d-flex align-items-center justify-content-center">
+                Create Order
+              </div>
             </div>
           </form>
         </div>
