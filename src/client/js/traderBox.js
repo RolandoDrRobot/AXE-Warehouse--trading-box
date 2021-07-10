@@ -28,6 +28,7 @@ $('.js-create-order').on('click', function(e) {
   var type = '';
   var side = '';
   var amount = parseFloat($('#newOrder .js-amount').val());
+  var estimatedCost = 0;
   var price = 0
 
   if ($('.js-btc-trade').attr('checked')) symbol = $('.js-btc-trade').val();
@@ -64,9 +65,26 @@ $('.js-create-order').on('click', function(e) {
     $('.js-order-result').addClass('error');
     return
   }
-  if (amount == "") {
+
+  function minimumAmount(amount) {
+    const quotes = localStorage.getItem('quotes');
+    if ($('.js-btc-trade').attr('checked')) {
+      estimatedCost = amount * JSON.parse(quotes).btcPrice;
+      return estimatedCost > 10
+    }
+    if ($('.js-eth-trade').attr('checked')) {
+      estimatedCost = amount * JSON.parse(quotes).ethPrice;
+      return estimatedCost > 10
+    }
+    if ($('.js-xrp-trade').attr('checked')) {
+      estimatedCost = amount * JSON.parse(quotes).xrpPrice;
+      return estimatedCost > 10
+    }
+  }
+
+  if (isNaN(amount) || !minimumAmount(amount)) {
     var img = '<img src="img/warning.png" class="mr-2">';
-    var msg = 'Please type the amount'
+    var msg = 'Please type an amount greater than $10'
     $('.js-order-result').html(img + msg);
     $('.js-order-result').addClass('error');
     return
@@ -77,6 +95,7 @@ $('.js-create-order').on('click', function(e) {
     type : type,
     side : side,
     amount : amount,
+    estimatedCost: estimatedCost,
     price : price,
   }
 

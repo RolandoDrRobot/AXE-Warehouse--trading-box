@@ -128,14 +128,6 @@ nav .logo {
   text-align: center;
 }
 
-.option.buy {
-  background-color: rgba(0, 128, 38, 0.6);
-}
-
-.option.sell {
-  background-color: rgb(128, 0, 0, 0.6);
-}
-
 .option:hover,
 .option--selected,
 .option:hover p,
@@ -207,9 +199,14 @@ nav .logo {
 .order-result {
   display: flex;
   justify-content: center;
+  text-align: center;
   margin: 26px 10px;
   padding: 15px;
   border-radius: 8px;
+}
+
+.order-result img {
+  height: 25px;
 }
 
 .order-result.error {
