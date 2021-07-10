@@ -3,6 +3,7 @@ function fetchQuotes() {
     $('.js-btc-quote').html(data.btcPrice.toFixed(0));
     $('.js-eth-quote').html(data.ethPrice.toFixed(0));
     $('.js-xrp-quote').html(data.xrpPrice.toFixed(2));
+    localStorage.setItem('quotes', JSON.stringify(data));
   });
 }
 

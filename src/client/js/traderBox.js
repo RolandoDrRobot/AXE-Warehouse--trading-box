@@ -1,10 +1,4 @@
 // Trading Box
-// $('.js-option').on('click', function() {
-//   $(this).toggleClass('option--selected');
-//   var isSelected = $(this).hasClass('option--selected');
-//   $(this).find('input[type=radio]').attr('checked', isSelected);
-// });
-
 $('.js-option').on('click', function() {
   var options = $('[name="' + $(this).find('input[type=radio]').attr("name") + '"]');
   for (let i = 0; i < options.length; i++) {
@@ -21,7 +15,13 @@ $('.js-option').on('click', function() {
   }
 });
 
-
+$('.js-amount').on('keyup', function(e) {
+  const quotes = localStorage.getItem('quotes');
+  var amount = $(this).val();
+  if ($('.js-btc-trade').attr('checked')) $('.js-estimaded-order').html('$ ' + (amount * JSON.parse(quotes).btcPrice).toFixed(2)); 
+  if ($('.js-eth-trade').attr('checked')) $('.js-estimaded-order').html('$ ' + (amount * JSON.parse(quotes).ethPrice).toFixed(2));
+  if ($('.js-xrp-trade').attr('checked')) $('.js-estimaded-order').html('$ ' + (amount * JSON.parse(quotes).xrpPrice).toFixed(2));
+});
 
 $('.js-create-order').on('click', function(e) {
   var symbol = '';
@@ -40,6 +40,38 @@ $('.js-create-order').on('click', function(e) {
   if (symbol == 'BTC/USDT') price = $('.js-btc-quote').text();
   if (symbol == 'ETH/USDT') price = $('.js-eth-quote').text();
   if (symbol == 'XRP/USDT') price = $('.js-xrp-quote').text();
+
+  if (symbol == "") {
+    var img = '<img src="img/warning.png" class="mr-2">';
+    var msg = 'Please select a coin'
+    $('.js-order-result').html(img + msg);
+    $('.js-order-result').addClass('error');
+    return
+  }
+
+  if (type == "") {
+    var img = '<img src="img/warning.png" class="mr-2">';
+    var msg = 'Please select either market or limit'
+    $('.js-order-result').html(img + msg);
+    $('.js-order-result').addClass('error');
+    return
+  }
+
+  if (side == "") {
+    var img = '<img src="img/warning.png" class="mr-2">';
+    var msg = 'Please select either buy or sell'
+    $('.js-order-result').html(img + msg);
+    $('.js-order-result').addClass('error');
+    return
+  }
+
+  if (amount == "") {
+    var img = '<img src="img/warning.png" class="mr-2">';
+    var msg = 'Please type the amount'
+    $('.js-order-result').html(img + msg);
+    $('.js-order-result').addClass('error');
+    return
+  }
 
   var data = {
     symbol : symbol,

@@ -204,6 +204,19 @@ nav .logo {
   background-color: var(--normal-tourquese);
 }
 
+.order-result {
+  display: flex;
+  justify-content: center;
+  margin: 26px 10px;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.order-result.error {
+  border: 2px solid #940a16;
+  background: #310307;
+}
+
 /* -----------------------
 /* --- Orders --- 
 /* -------------------- */
