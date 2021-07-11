@@ -38,7 +38,7 @@ app.get('/fetchQuotes', (req, res) => {
 });
 
 app.post('/createOrder', (req, res) => {
-  ccxt.createOrder(req.body.symbol, req.body.type, req.body.side, req.body.amount, req.body.price);
+  res.send(ccxt.createOrder(req.body.symbol, req.body.type, req.body.side, req.body.amount, req.body.price));
 });
 
 app.post('/cancelOrder', (req, res) => {

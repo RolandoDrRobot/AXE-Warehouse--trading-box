@@ -43,7 +43,11 @@ const fetchQuotes = async () => {
 }
 
 const createOrder = async (symbol, type, side, amount, price) => {
-  return await exchangeClient.createOrder(symbol, type, side, amount, price);
+  try {
+    return await exchangeClient.createOrder(symbol, type, side, amount, price);
+  } catch (e) {
+    return e;
+  }
 }
 
 const cancelOrder = async (id, symbol) => {

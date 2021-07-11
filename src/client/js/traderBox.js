@@ -110,6 +110,8 @@ $('.js-create-order').on('click', function(e) {
     type: 'POST',
     url: '/createOrder',
     data: data,
-    success: success.render(),
+    success: '',
+  }).done(function (data) {
+      console.log(data);
   });
 });
