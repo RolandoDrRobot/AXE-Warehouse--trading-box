@@ -1,35 +1,124 @@
 // Trading Box
-$('.js-option').on('click', function() {
-  var options = $('[name="' + $(this).find('input[type=radio]').attr("name") + '"]');
-  for (let i = 0; i < options.length; i++) {
-    $(options[i]).attr('checked', false);
-  }
-  $(this).find('input[type=radio]').attr('checked', true);
+function enableButtons() {
+  $('.js-option').on('click', function() {
+    var options = $('[name="' + $(this).find('input[type=radio]').attr("name") + '"]');
+    for (let i = 0; i < options.length; i++) {
+      $(options[i]).attr('checked', false);
+    }
+    $(this).find('input[type=radio]').attr('checked', true);
+  
+    var optionsBoxes = $('.js-option');
+    for (let i = 0; i < optionsBoxes.length; i++) {
+      $(optionsBoxes[i]).removeClass('option--selected');
+      if ($(optionsBoxes[i]).has($(optionsBoxes[i]).find('input[type=radio]:checked')).length !== 0) {
+        $(optionsBoxes[i]).addClass('option--selected');
+      }
+    }
+  });
+}
 
-  var optionsBoxes = $('.js-option');
-  for (let i = 0; i < optionsBoxes.length; i++) {
-    $(optionsBoxes[i]).removeClass('option--selected');
-    if ($(optionsBoxes[i]).has($(optionsBoxes[i]).find('input[type=radio]:checked')).length !== 0) {
-      $(optionsBoxes[i]).addClass('option--selected');
+function convertCointoUsdt(amount) {
+  $(amount).on('keyup', function(e) {
+    const quotes = localStorage.getItem('quotes');
+    var amount = $(this).val();
+    if ($('.js-btc-trade').attr('checked')) $('.js-estimaded-order').html('$ ' + (amount * JSON.parse(quotes).btcPrice).toFixed(2)); 
+    if ($('.js-eth-trade').attr('checked')) $('.js-estimaded-order').html('$ ' + (amount * JSON.parse(quotes).ethPrice).toFixed(2));
+    if ($('.js-xrp-trade').attr('checked')) $('.js-estimaded-order').html('$ ' + (amount * JSON.parse(quotes).xrpPrice).toFixed(2));
+  });
+}
+
+function minimumAmount(amount) {
+  const quotes = localStorage.getItem('quotes');
+  if ($('.js-btc-trade').attr('checked')) {
+    estimatedCost = amount * JSON.parse(quotes).btcPrice;
+    return estimatedCost > 10
+  }
+  if ($('.js-eth-trade').attr('checked')) {
+    estimatedCost = amount * JSON.parse(quotes).ethPrice;
+    return estimatedCost > 10
+  }
+  if ($('.js-xrp-trade').attr('checked')) {
+    estimatedCost = amount * JSON.parse(quotes).xrpPrice;
+    return estimatedCost > 10
+  }
+}
+
+function prepareOrder(typeOfOrder, amount, pair, side, estimatedCost) {
+  // $('.js-order-result').html('');
+  // $('.js-order-result').removeClass('success, error');
+  // var typeOfOrderElement = '<p class="type-of-order" class="mr-2">' + typeOfOrder;
+  // var amountElement = '<p class="type-of-order" class="mr-2">' + amount;
+  // var pairElement = '<p class="type-of-order" class="mr-2">' + side;
+  // var sideElement = '<p class="type-of-order" class="mr-2">' + pair;
+  // var createOrderButton = '<div class="js-create-order submit-btn d-flex align-items-center justify-content-center">Create Order</div>';
+}
+
+function validateOrder(typeOfOrder, amount, pair, side) {
+  if (typeOfOrder == "") {
+    var img = '<img src="img/warning.png" class="d-block m-auto">';
+    var msg = 'Please select either market or limit'
+    $('.js-order-result').html(img + msg);
+    $('.js-order-result').addClass('error');
+    return
+  }
+
+  // Valids if It is a limit order
+  if (typeOfOrder === "limit") {
+    var isPrice = $('#newOrder .js-price').val();
+    if (isPrice) {
+      price = isPrice;
+    } else {
+      var img = '<img src="img/warning.png" class="d-block m-auto">';
+      var msg = 'Please select price for your limit order'
+      $('.js-order-result').html(img + msg);
+      $('.js-order-result').addClass('error');
+      return
     }
   }
-});
 
-$('.js-amount').on('keyup', function(e) {
-  const quotes = localStorage.getItem('quotes');
-  var amount = $(this).val();
-  if ($('.js-btc-trade').attr('checked')) $('.js-estimaded-order').html('$ ' + (amount * JSON.parse(quotes).btcPrice).toFixed(2)); 
-  if ($('.js-eth-trade').attr('checked')) $('.js-estimaded-order').html('$ ' + (amount * JSON.parse(quotes).ethPrice).toFixed(2));
-  if ($('.js-xrp-trade').attr('checked')) $('.js-estimaded-order').html('$ ' + (amount * JSON.parse(quotes).xrpPrice).toFixed(2));
-});
+  // Valids amount
+  if (isNaN(amount) || !minimumAmount(amount)) {
+    var img = '<img src="img/warning.png" class="d-block m-auto">';
+    var msg = 'Please type an amount greater than $10'
+    $('.js-order-result').html(img + msg);
+    $('.js-order-result').addClass('error');
+    return
+  }
+
+  // Valids if any coin is checked
+  if (pair == "") {
+    var img = '<img src="img/warning.png" class="d-block m-auto">';
+    var msg = 'Please select a coin'
+    $('.js-order-result').html(img + msg);
+    $('.js-order-result').addClass('error');
+    return
+  }
+
+  // Valids if either sell or buy is checked
+  if (side == "") {
+    var img = '<img src="img/warning.png" class="d-block m-auto">';
+    var msg = 'Please select either buy or sell'
+    $('.js-order-result').html(img + msg);
+    $('.js-order-result').addClass('error');
+    return
+  }
+
+  prepareOrder(typeOfOrder, amount, pair, side);
+}
+
+function createOrder() {
+
+}
+
 
 $('.js-create-order').on('click', function(e) {
+  
   var symbol = '';
   var type = '';
   var side = '';
   var amount = parseFloat($('#newOrder .js-amount').val());
   var estimatedCost = 0;
-  var price = 0
+  var price = 0;
 
   if ($('.js-btc-trade').attr('checked')) symbol = $('.js-btc-trade').val();
   if ($('.js-eth-trade').attr('checked')) symbol = $('.js-eth-trade').val();
@@ -39,71 +128,19 @@ $('.js-create-order').on('click', function(e) {
   if ($('.js-buy-trade').attr('checked')) side = 'buy';
   if ($('.js-sell-trade').attr('checked')) side = 'sell';
 
-  $('.js-order-result').html('');
-  if (symbol == "") {
-    var img = '<img src="img/warning.png" class="mr-2">';
-    var msg = 'Please select a coin'
-    $('.js-order-result').html(img + msg);
-    $('.js-order-result').addClass('error');
-    return
-  }
-  if (type == "") {
-    var img = '<img src="img/warning.png" class="mr-2">';
-    var msg = 'Please select either market or limit'
-    $('.js-order-result').html(img + msg);
-    $('.js-order-result').addClass('error');
-    return
-  }
-  if (type === "limit") {
-    var isPrice = $('#newOrder .js-price').val();
-    if (isPrice) {
-      price = isPrice;
-    } else {
-      var img = '<img src="img/warning.png" class="mr-2">';
-      var msg = 'Please select price for your limit order'
-      $('.js-order-result').html(img + msg);
-      $('.js-order-result').addClass('error');
-      return
-    }
-  }
+  
+  
   if (type === "market") {
     if (symbol == 'BTC/USDT') price = $('.js-btc-quote').text();
     if (symbol == 'ETH/USDT') price = $('.js-eth-quote').text();
     if (symbol == 'XRP/USDT') price = $('.js-xrp-quote').text();
   }
-  if (side == "") {
-    var img = '<img src="img/warning.png" class="mr-2">';
-    var msg = 'Please select either buy or sell'
-    $('.js-order-result').html(img + msg);
-    $('.js-order-result').addClass('error');
-    return
-  }
+  
+
 
   
 
-  function minimumAmount(amount) {
-    const quotes = localStorage.getItem('quotes');
-    if ($('.js-btc-trade').attr('checked')) {
-      estimatedCost = amount * JSON.parse(quotes).btcPrice;
-      return estimatedCost > 10
-    }
-    if ($('.js-eth-trade').attr('checked')) {
-      estimatedCost = amount * JSON.parse(quotes).ethPrice;
-      return estimatedCost > 10
-    }
-    if ($('.js-xrp-trade').attr('checked')) {
-      estimatedCost = amount * JSON.parse(quotes).xrpPrice;
-      return estimatedCost > 10
-    }
-  }
-
-  if (isNaN(amount) || !minimumAmount(amount)) {
-    var img = '<img src="img/warning.png" class="mr-2">';
-    var msg = 'Please type an amount greater than $10'
-    $('.js-order-result').html(img + msg);
-    $('.js-order-result').addClass('error');
-    return
-  }
+  
 
   var data = {
     symbol : symbol,
@@ -127,4 +164,22 @@ $('.js-create-order').on('click', function(e) {
     data: data,
     success: success.render(),
   });
+
+  
 });
+
+// ; (function initilizeTraderBox() {
+//   enableButtons();
+//   convertCointoUsdt($('.js-amount'));
+
+//   var symbol = '';
+//   var type = '';
+//   var side = '';
+//   var amount = 0;
+//   var estimatedCost = 0;
+//   var price = 0;
+
+//   $('.js-confirm-order').on('click', {
+//     validateOrder(typeOfOrder, pair, side, estimatedCost);
+//   });
+// })();

@@ -160,20 +160,38 @@
             </div>
             <div class="submit-order d-flex align-items-center justify-content-between">
               <input type="text" class="js-price" placeholder="Price to buy/sell" />
-              <div class="js-create-order submit-btn d-flex align-items-center justify-content-center">
+              <div class="js-confirm-order submit-btn d-flex align-items-center justify-content-center" data-toggle="modal" data-target=".bd-example-modal-sm">
                 Create Order
               </div>
             </div>
-
-            <div class="js-order-result order-result"></div>
           </form>
+          
         </div>
 
         <!-- Modals -->
-        <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="confirm-order modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-sm">
             <div class="modal-content">
-              
+              <div class="js-order-result order-result">
+                <!-- <div class="order-confirmation">
+                  <div class="coins-to-swap d-flex justify-content-center">
+                    <img class="mx-2" src="img/bitcoin.png">
+                    <img class="mx-2" src="img/right-arrow.svg">
+                    <img class="mx-2" src="img/tether.png">
+                  </div>
+                  <p class="buy-transanction my-3">Do you want to buy 100 XRP/USDT for an estimated cost of $100 at a price of $ 0.65?</p>
+                  <p class="sell-transanction my-3">Do you want to sell 100 XRP/USDT to get an estimate of $ 100 at a price of $ 0.65?</p>
+                  <div class="js-create-order submit-btn d-flex align-items-center justify-content-center" data-toggle="modal" data-target=".bd-example-modal-sm">
+                    Create Order
+                  </div>
+                </div> -->
+
+                <div class="order-error">
+                  <img src="img/warning.png" class="mb-3">
+                  <p>Please type an amount greater than $10</p>
+                </div>
+
+              </div>
             </div>
           </div>
         </div>
