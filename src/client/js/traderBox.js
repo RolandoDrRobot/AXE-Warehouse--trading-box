@@ -38,10 +38,6 @@ $('.js-create-order').on('click', function(e) {
   if ($('.js-limit-trade').attr('checked')) type = 'limit';
   if ($('.js-buy-trade').attr('checked')) side = 'buy';
   if ($('.js-sell-trade').attr('checked')) side = 'sell';
-  if (symbol == 'BTC/USDT') price = $('.js-btc-quote').text();
-  if (symbol == 'ETH/USDT') price = $('.js-eth-quote').text();
-  if (symbol == 'XRP/USDT') price = $('.js-xrp-quote').text();
-
 
   $('.js-order-result').html('');
   if (symbol == "") {
@@ -58,6 +54,23 @@ $('.js-create-order').on('click', function(e) {
     $('.js-order-result').addClass('error');
     return
   }
+  if (type === "limit") {
+    var isPrice = $('#newOrder .js-price').val();
+    if (isPrice) {
+      price = isPrice;
+    } else {
+      var img = '<img src="img/warning.png" class="mr-2">';
+      var msg = 'Please select price for your limit order'
+      $('.js-order-result').html(img + msg);
+      $('.js-order-result').addClass('error');
+      return
+    }
+  }
+  if (type === "market") {
+    if (symbol == 'BTC/USDT') price = $('.js-btc-quote').text();
+    if (symbol == 'ETH/USDT') price = $('.js-eth-quote').text();
+    if (symbol == 'XRP/USDT') price = $('.js-xrp-quote').text();
+  }
   if (side == "") {
     var img = '<img src="img/warning.png" class="mr-2">';
     var msg = 'Please select either buy or sell'
@@ -65,6 +78,8 @@ $('.js-create-order').on('click', function(e) {
     $('.js-order-result').addClass('error');
     return
   }
+
+  
 
   function minimumAmount(amount) {
     const quotes = localStorage.getItem('quotes');
@@ -110,8 +125,6 @@ $('.js-create-order').on('click', function(e) {
     type: 'POST',
     url: '/createOrder',
     data: data,
-    success: '',
-  }).done(function (data) {
-      console.log(data);
+    success: success.render(),
   });
 });
