@@ -119,7 +119,6 @@ function createOrder(symbol, type, side, amount, estimatedCost, price) {
     data: data,
     success: function() {
       success.render();
-      setTimeout(location.reload(), 3000);
     },
   });
 }
@@ -129,7 +128,7 @@ function createOrder(symbol, type, side, amount, estimatedCost, price) {
 function prepareOrder(symbol, type, side, amount, estimatedCost, price) {
   function isBuyOrSell(side, amount, symbol) {
     if ( side == 'buy' ) return '<p class="buy-transanction my-3">Do you want to ' + side + ' ' + amount + ' ' + symbol + ' for an estimated cost of $' + estimatedCost +  ' at a price of $' + price + '</p>' 
-    if ( side == 'sell' ) return '<p class="sell-transanction my-3">Do you want to ' + side + ' ' + amount + ' ' + symbol + ' to get an estimate cost of $' + estimatedCost + ' at a price of $' + price + '</p>'
+    if ( side == 'sell' ) return '<p class="sell-transanction my-3">Do you want to ' + side + ' ' + amount + ' ' + symbol + ' to get an estimate of $' + estimatedCost + ' at a price of $' + price + '</p>'
   }
   var buyOrSell = isBuyOrSell(side, amount, symbol);
 
@@ -154,7 +153,9 @@ function prepareOrder(symbol, type, side, amount, estimatedCost, price) {
   '</div>';
 
   $('.js-order-result').html(orderElement);
-  $('.js-create-order').on('click', createOrder(symbol, type, amount, estimatedCost, price));
+  $('.js-create-order').on('click', function() {
+    createOrder(symbol, type, side, amount, estimatedCost, price);
+  });
 }
 
 
@@ -215,8 +216,8 @@ function validateOrder(symbol, type, side, amount, estimatedCost, price) {
 ; (function initilizeTraderBox() {
   enableButtons();
   convertCointoUsdt($('.js-amount'));
-
-  $('.js-confirm-order').on('click', function(){
+  $('.js-order-result').html('');
+  $('.js-confirm-order').on('click', function() {
     var tradeData = captureOrderInformation();
     validateOrder(tradeData.symbol, tradeData.type, tradeData.side, tradeData.amount, tradeData.estimatedCost.toFixed(2), tradeData.price.toFixed(2))
   })
