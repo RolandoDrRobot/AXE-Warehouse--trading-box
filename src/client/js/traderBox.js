@@ -17,6 +17,7 @@ function enableButtons() {
   });
 }
 
+// convertCointoUsdt
 function convertCointoUsdt(amount) {
   $(amount).on('keyup', function(e) {
     const quotes = localStorage.getItem('quotes');
@@ -27,34 +28,138 @@ function convertCointoUsdt(amount) {
   });
 }
 
+// minimumAmount
 function minimumAmount(amount) {
-  const quotes = localStorage.getItem('quotes');
+  var estimatedCostMinimumAmount = 0;
+  const quotesMinimumAmount = localStorage.getItem('quotes');
   if ($('.js-btc-trade').attr('checked')) {
-    estimatedCost = amount * JSON.parse(quotes).btcPrice;
-    return estimatedCost > 10
+    estimatedCostMinimumAmount = amount * JSON.parse(quotesMinimumAmount).btcPrice;
+    return estimatedCostMinimumAmount > 10
   }
   if ($('.js-eth-trade').attr('checked')) {
-    estimatedCost = amount * JSON.parse(quotes).ethPrice;
-    return estimatedCost > 10
+    estimatedCostMinimumAmount = amount * JSON.parse(quotesMinimumAmount).ethPrice;
+    return estimatedCostMinimumAmount > 10
   }
   if ($('.js-xrp-trade').attr('checked')) {
-    estimatedCost = amount * JSON.parse(quotes).xrpPrice;
-    return estimatedCost > 10
+    estimatedCostMinimumAmount = amount * JSON.parse(quotesMinimumAmount).xrpPrice;
+    return estimatedCostMinimumAmount > 10 
   }
 }
 
-function prepareOrder(typeOfOrder, amount, pair, side, estimatedCost) {
-  // $('.js-order-result').html('');
-  // $('.js-order-result').removeClass('success, error');
-  // var typeOfOrderElement = '<p class="type-of-order" class="mr-2">' + typeOfOrder;
-  // var amountElement = '<p class="type-of-order" class="mr-2">' + amount;
-  // var pairElement = '<p class="type-of-order" class="mr-2">' + side;
-  // var sideElement = '<p class="type-of-order" class="mr-2">' + pair;
-  // var createOrderButton = '<div class="js-create-order submit-btn d-flex align-items-center justify-content-center">Create Order</div>';
+function captureOrderInformation() {
+  var symbol = '';
+  var type = '';
+  var side = '';
+  var amount = parseFloat($('#newOrder .js-amount').val());;
+  var estimatedCost =0;
+  var price = 0;
+
+  // Get Quotes
+  const quotes = localStorage.getItem('quotes');
+  var btcPrice = JSON.parse(quotes).btcPrice;
+  var ethPrice = JSON.parse(quotes).ethPrice;
+  var xrpPrice = JSON.parse(quotes).xrpPrice;
+
+  // Get Symbol
+  if ($('.js-btc-trade').attr('checked')) symbol = $('.js-btc-trade').val();
+  if ($('.js-eth-trade').attr('checked')) symbol = $('.js-eth-trade').val();
+  if ($('.js-xrp-trade').attr('checked')) symbol = $('.js-xrp-trade').val();
+
+  // Get type
+  if ($('.js-market-trade').attr('checked')) type = 'market';
+  if ($('.js-limit-trade').attr('checked')) type = 'limit';
+
+  // Get side
+  if ($('.js-buy-trade').attr('checked')) side = 'buy';
+  if ($('.js-sell-trade').attr('checked')) side = 'sell';
+
+  // Get estimated cost
+  if ($('.js-btc-trade').attr('checked')) estimatedCost = amount * btcPrice;
+  if ($('.js-eth-trade').attr('checked')) estimatedCost = amount * ethPrice;
+  if ($('.js-xrp-trade').attr('checked')) estimatedCost = amount * xrpPrice;
+
+  // Get Price
+  if (type === "market") {
+    if (symbol == 'BTC/USDT') price = btcPrice;
+    if (symbol == 'ETH/USDT') price = ethPrice;
+    if (symbol == 'XRP/USDT') price = xrpPrice;
+  }
+
+  var tradeInfo = {
+    symbol : symbol,
+    type : type,
+    side : side,
+    amount : amount,
+    estimatedCost: estimatedCost,
+    price : price,
+  }
+  return tradeInfo;
 }
 
-function validateOrder(typeOfOrder, amount, pair, side) {
-  if (typeOfOrder == "") {
+function createOrder(symbol, type, side, amount, estimatedCost, price) {
+  var data = {
+    symbol : symbol,
+    type : type,
+    side : side,
+    amount : amount,
+    estimatedCost: estimatedCost,
+    price : price,
+  }
+
+  var success = {
+    render: function() {
+      $('.js-order-result').html('<img src="img/checked.png" class="mr-2">Order created Succesfully');
+      $('.js-order-result').addClass('success');
+    }
+  }
+
+  $.ajax({
+    type: 'POST',
+    url: '/createOrder',
+    data: data,
+    success: function() {
+      success.render();
+      setTimeout(location.reload(), 3000);
+    },
+  });
+}
+
+
+// prepareOrder
+function prepareOrder(symbol, type, side, amount, estimatedCost, price) {
+  function isBuyOrSell(side, amount, symbol) {
+    if ( side == 'buy' ) return '<p class="buy-transanction my-3">Do you want to ' + side + ' ' + amount + ' ' + symbol + ' for an estimated cost of $' + estimatedCost +  ' at a price of $' + price + '</p>' 
+    if ( side == 'sell' ) return '<p class="sell-transanction my-3">Do you want to ' + side + ' ' + amount + ' ' + symbol + ' to get an estimate cost of $' + estimatedCost + ' at a price of $' + price + '</p>'
+  }
+  var buyOrSell = isBuyOrSell(side, amount, symbol);
+
+  function pairIconElement(symbol) {
+    if ( symbol == 'BTC/USDT' ) return '<img class="mx-2" src="img/bitcoin.png">'
+    if ( symbol == 'ETH/USDT' ) return '<img class="mx-2" src="img/ethereum.png">'
+    if ( symbol == 'XRP/USDT' ) return '<img class="mx-2" src="img/xrp.png">'
+  }
+  var pairIcon = pairIconElement(symbol); 
+
+  var orderElement = 
+  '<div class="order-confirmation">' +
+    '<div class="coins-to-swap d-flex justify-content-center">' +
+      pairIcon +
+      '<img class="mx-2" src="img/right-arrow.svg">' +
+      '<img class="mx-2" src="img/tether.png">' +
+    '</div>' +
+    buyOrSell +
+    '<div class="js-create-order submit-btn d-flex align-items-center justify-content-center" data-toggle="modal" data-target=".bd-example-modal-sm">' +
+      'Create Order' +
+    '</div>' +
+  '</div>';
+
+  $('.js-order-result').html(orderElement);
+  $('.js-create-order').on('click', createOrder(symbol, type, amount, estimatedCost, price));
+}
+
+
+function validateOrder(symbol, type, side, amount, estimatedCost, price) {
+  if (type == "") {
     var img = '<img src="img/warning.png" class="d-block m-auto">';
     var msg = 'Please select either market or limit'
     $('.js-order-result').html(img + msg);
@@ -63,7 +168,7 @@ function validateOrder(typeOfOrder, amount, pair, side) {
   }
 
   // Valids if It is a limit order
-  if (typeOfOrder === "limit") {
+  if (type === "limit") {
     var isPrice = $('#newOrder .js-price').val();
     if (isPrice) {
       price = isPrice;
@@ -86,7 +191,7 @@ function validateOrder(typeOfOrder, amount, pair, side) {
   }
 
   // Valids if any coin is checked
-  if (pair == "") {
+  if (symbol == "") {
     var img = '<img src="img/warning.png" class="d-block m-auto">';
     var msg = 'Please select a coin'
     $('.js-order-result').html(img + msg);
@@ -103,83 +208,17 @@ function validateOrder(typeOfOrder, amount, pair, side) {
     return
   }
 
-  prepareOrder(typeOfOrder, amount, pair, side);
-}
-
-function createOrder() {
-
+  prepareOrder(symbol, type, side, amount, estimatedCost, price);
 }
 
 
-$('.js-create-order').on('click', function(e) {
-  
-  var symbol = '';
-  var type = '';
-  var side = '';
-  var amount = parseFloat($('#newOrder .js-amount').val());
-  var estimatedCost = 0;
-  var price = 0;
+; (function initilizeTraderBox() {
+  enableButtons();
+  convertCointoUsdt($('.js-amount'));
 
-  if ($('.js-btc-trade').attr('checked')) symbol = $('.js-btc-trade').val();
-  if ($('.js-eth-trade').attr('checked')) symbol = $('.js-eth-trade').val();
-  if ($('.js-xrp-trade').attr('checked')) symbol = $('.js-xrp-trade').val();
-  if ($('.js-market-trade').attr('checked')) type = 'market';
-  if ($('.js-limit-trade').attr('checked')) type = 'limit';
-  if ($('.js-buy-trade').attr('checked')) side = 'buy';
-  if ($('.js-sell-trade').attr('checked')) side = 'sell';
+  $('.js-confirm-order').on('click', function(){
+    var tradeData = captureOrderInformation();
+    validateOrder(tradeData.symbol, tradeData.type, tradeData.side, tradeData.amount, tradeData.estimatedCost.toFixed(2), tradeData.price.toFixed(2))
+  })
 
-  
-  
-  if (type === "market") {
-    if (symbol == 'BTC/USDT') price = $('.js-btc-quote').text();
-    if (symbol == 'ETH/USDT') price = $('.js-eth-quote').text();
-    if (symbol == 'XRP/USDT') price = $('.js-xrp-quote').text();
-  }
-  
-
-
-  
-
-  
-
-  var data = {
-    symbol : symbol,
-    type : type,
-    side : side,
-    amount : amount,
-    estimatedCost: estimatedCost,
-    price : price,
-  }
-
-  var success = {
-    render: function() {
-      $('.js-order-result').html('<img src="img/checked.png" class="mr-2">Order created Succesfully');
-      $('.js-order-result').addClass('success');
-    }
-  }
-
-  $.ajax({
-    type: 'POST',
-    url: '/createOrder',
-    data: data,
-    success: success.render(),
-  });
-
-  
-});
-
-// ; (function initilizeTraderBox() {
-//   enableButtons();
-//   convertCointoUsdt($('.js-amount'));
-
-//   var symbol = '';
-//   var type = '';
-//   var side = '';
-//   var amount = 0;
-//   var estimatedCost = 0;
-//   var price = 0;
-
-//   $('.js-confirm-order').on('click', {
-//     validateOrder(typeOfOrder, pair, side, estimatedCost);
-//   });
-// })();
+})();
