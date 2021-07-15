@@ -173,7 +173,7 @@ function prepareOrder(symbol, type, side, amount, estimatedCost, price) {
       '<img class="mx-2" src="img/tether.png">' +
     '</div>' +
     buyOrSell +
-    '<div class="js-create-order submit-btn d-flex align-items-center justify-content-center" data-toggle="modal" data-target=".bd-example-modal-sm">' +
+    '<div class="js-create-order submit-btn d-flex align-items-center justify-content-center">' +
       'Create Order' +
     '</div>' +
   '</div>';

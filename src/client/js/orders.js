@@ -16,7 +16,7 @@ function createRecord(order, buySell, coin, ticker, amount, cost, price, date, m
   var orderTemplate = 
   '<div class="order ' + buySell + ' mt-3">' +
     '<div class="d-flex">' +
-      '<div class="js-close-order close-order">' +
+      '<div class="js-close-order close-order" data-toggle="modal" data-target=".cancelOrderModal">' +
         cancelButton +
         '<label class="js-order-ticker d-none">' + ticker + '</label>' +
         '<label class="js-order-id d-none">' + id + '</label>' +
@@ -115,11 +115,13 @@ function fetchOrders() {
         id: $(this).find('.js-order-id').text(),
         ticker: $(this).find('.js-order-ticker').text(),
       }
-      $.ajax({
-        type: 'POST',
-        url: '/cancelOrder',
-        data: data,
-        success: location.reload(),
+      $('.js-cancel-order').on('click', function() {
+        $.ajax({
+          type: 'POST',
+          url: '/cancelOrder',
+          data: data,
+          success: location.reload(),
+        });
       });
     });
   });
