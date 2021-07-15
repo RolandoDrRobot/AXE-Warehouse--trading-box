@@ -108,8 +108,8 @@ function createOrder(symbol, type, side, amount, estimatedCost, price) {
 
   var success = {
     render: function() {
-      $('.js-order-result').html('<img src="img/checked.png" class="mr-2">Order created Succesfully');
-      $('.js-order-result').addClass('success');
+      $('.js-order-result-done').html('<img src="img/checked.png" class="mr-2">Order created Succesfully');
+      $('.js-order-result-done').addClass('success');
     }
   }
 
@@ -119,6 +119,9 @@ function createOrder(symbol, type, side, amount, estimatedCost, price) {
     data: data,
     success: function() {
       success.render();
+      setTimeout(function() {
+        location.reload();
+      }, 3000);
     },
   });
 }
@@ -127,8 +130,8 @@ function createOrder(symbol, type, side, amount, estimatedCost, price) {
 // prepareOrder
 function prepareOrder(symbol, type, side, amount, estimatedCost, price) {
   function isBuyOrSell(side, amount, symbol) {
-    if ( side == 'buy' ) return '<p class="buy-transanction my-3">Do you want to ' + side + ' ' + amount + ' ' + symbol + ' for an estimated cost of $' + estimatedCost +  ' at a price of $' + price + '</p>' 
-    if ( side == 'sell' ) return '<p class="sell-transanction my-3">Do you want to ' + side + ' ' + amount + ' ' + symbol + ' to get an estimate of $' + estimatedCost + ' at a price of $' + price + '</p>'
+    if ( side == 'buy' ) return '<p class="buy-transanction mt-2 mb-4 text-center">Do you want to ' + side + ' ' + amount + ' ' + symbol + ' for an estimated cost of $' + estimatedCost +  ' at a price of $' + price + '</p>' 
+    if ( side == 'sell' ) return '<p class="sell-transanction mt-2 mb-4 text-center">Do you want to ' + side + ' ' + amount + ' ' + symbol + ' to get an estimate of $' + estimatedCost + ' at a price of $' + price + '</p>'
   }
   var buyOrSell = isBuyOrSell(side, amount, symbol);
 
@@ -153,7 +156,7 @@ function prepareOrder(symbol, type, side, amount, estimatedCost, price) {
   '</div>';
 
   $('.js-order-result').html(orderElement);
-  $('.js-create-order').on('click', function() {
+  $('.js-create-order').on('click', function(e) {
     createOrder(symbol, type, side, amount, estimatedCost, price);
   });
 }
@@ -161,7 +164,7 @@ function prepareOrder(symbol, type, side, amount, estimatedCost, price) {
 
 function validateOrder(symbol, type, side, amount, estimatedCost, price) {
   if (type == "") {
-    var img = '<img src="img/warning.png" class="d-block m-auto">';
+    var img = '<img src="img/warning.png" class="d-block">';
     var msg = 'Please select either market or limit'
     $('.js-order-result').html(img + msg);
     $('.js-order-result').addClass('error');
@@ -174,7 +177,7 @@ function validateOrder(symbol, type, side, amount, estimatedCost, price) {
     if (isPrice) {
       price = isPrice;
     } else {
-      var img = '<img src="img/warning.png" class="d-block m-auto">';
+      var img = '<img src="img/warning.png" class="d-block">';
       var msg = 'Please select price for your limit order'
       $('.js-order-result').html(img + msg);
       $('.js-order-result').addClass('error');
@@ -184,7 +187,7 @@ function validateOrder(symbol, type, side, amount, estimatedCost, price) {
 
   // Valids amount
   if (isNaN(amount) || !minimumAmount(amount)) {
-    var img = '<img src="img/warning.png" class="d-block m-auto">';
+    var img = '<img src="img/warning.png" class="d-block">';
     var msg = 'Please type an amount greater than $10'
     $('.js-order-result').html(img + msg);
     $('.js-order-result').addClass('error');
@@ -193,7 +196,7 @@ function validateOrder(symbol, type, side, amount, estimatedCost, price) {
 
   // Valids if any coin is checked
   if (symbol == "") {
-    var img = '<img src="img/warning.png" class="d-block m-auto">';
+    var img = '<img src="img/warning.png" class="d-block">';
     var msg = 'Please select a coin'
     $('.js-order-result').html(img + msg);
     $('.js-order-result').addClass('error');
@@ -202,7 +205,7 @@ function validateOrder(symbol, type, side, amount, estimatedCost, price) {
 
   // Valids if either sell or buy is checked
   if (side == "") {
-    var img = '<img src="img/warning.png" class="d-block m-auto">';
+    var img = '<img src="img/warning.png" class="d-block">';
     var msg = 'Please select either buy or sell'
     $('.js-order-result').html(img + msg);
     $('.js-order-result').addClass('error');
@@ -216,8 +219,9 @@ function validateOrder(symbol, type, side, amount, estimatedCost, price) {
 ; (function initilizeTraderBox() {
   enableButtons();
   convertCointoUsdt($('.js-amount'));
-  $('.js-order-result').html('');
   $('.js-confirm-order').on('click', function() {
+    $('.js-order-result').html('');
+    $('.js-order-result').removeClass('error');
     var tradeData = captureOrderInformation();
     validateOrder(tradeData.symbol, tradeData.type, tradeData.side, tradeData.amount, tradeData.estimatedCost.toFixed(2), tradeData.price.toFixed(2))
   })

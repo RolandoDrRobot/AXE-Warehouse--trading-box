@@ -114,7 +114,13 @@
 
       <!-- Trade Box -->
       <div class="trade-box">
-        <h3 class="wallet-option mb-1" data-toggle="collapse" href="#trade-box" role="button" aria-expanded="false" aria-controls="collapseExample">Trader Box</h3>
+        
+        <h3 class="wallet-option mb-1" data-toggle="collapse" href="#trade-box" role="button" aria-expanded="false" aria-controls="collapseExample">
+          <a href="#trade-box" class="no-style">
+            Trader Box
+          </a>
+        </h3>
+        
         <div class="collapse" id="trade-box">
           <div class="prices d-flex justify-content-center mb-3">
             <label><img class="coin" src="img/bitcoin.png" /> $<span class="js-btc-quote"></span></label>
@@ -165,11 +171,14 @@
               </div>
             </div>
           </form>
+
+          <div class="js-order-result-done confirm-order order-result-done mt-4">
+          </div>
           
         </div>
 
         <!-- Modals -->
-        <div class="confirm-order modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div id="confirmation-modal" class="confirm-order modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-sm">
             <div class="modal-content">
               <div class="js-order-result order-result">
