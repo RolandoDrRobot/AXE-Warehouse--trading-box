@@ -20,29 +20,53 @@ function enableButtons() {
 // convertCointoUsdt
 function convertCointoUsdt(amount) {
   $(amount).on('keyup', function(e) {
-    const quotes = localStorage.getItem('quotes');
+    const quotes = JSON.parse(localStorage.getItem('quotes'));
     var amount = $(this).val();
-    if ($('.js-btc-trade').attr('checked')) $('.js-estimaded-order').html('$ ' + (amount * JSON.parse(quotes).btcPrice).toFixed(2)); 
-    if ($('.js-eth-trade').attr('checked')) $('.js-estimaded-order').html('$ ' + (amount * JSON.parse(quotes).ethPrice).toFixed(2));
-    if ($('.js-xrp-trade').attr('checked')) $('.js-estimaded-order').html('$ ' + (amount * JSON.parse(quotes).xrpPrice).toFixed(2));
+    if ($('.js-btc-trade').attr('checked')) $('.js-estimaded-order').html('$ ' + (amount * quotes.btcPrice).toFixed(2)); 
+    if ($('.js-eth-trade').attr('checked')) $('.js-estimaded-order').html('$ ' + (amount * quotes.ethPrice).toFixed(2));
+    if ($('.js-xrp-trade').attr('checked')) $('.js-estimaded-order').html('$ ' + (amount * quotes.xrpPrice).toFixed(2));
   });
 }
 
 // minimumAmount
 function minimumAmount(amount) {
   var estimatedCostMinimumAmount = 0;
-  const quotesMinimumAmount = localStorage.getItem('quotes');
+  const quotesMinimumAmount = JSON.parse(localStorage.getItem('quotes'));
   if ($('.js-btc-trade').attr('checked')) {
-    estimatedCostMinimumAmount = amount * JSON.parse(quotesMinimumAmount).btcPrice;
+    estimatedCostMinimumAmount = amount * quotesMinimumAmount.btcPrice;
     return estimatedCostMinimumAmount > 10
   }
   if ($('.js-eth-trade').attr('checked')) {
-    estimatedCostMinimumAmount = amount * JSON.parse(quotesMinimumAmount).ethPrice;
+    estimatedCostMinimumAmount = amount * quotesMinimumAmount.ethPrice;
     return estimatedCostMinimumAmount > 10
   }
   if ($('.js-xrp-trade').attr('checked')) {
-    estimatedCostMinimumAmount = amount * JSON.parse(quotesMinimumAmount).xrpPrice;
+    estimatedCostMinimumAmount = amount * quotesMinimumAmount.xrpPrice;
     return estimatedCostMinimumAmount > 10 
+  }
+}
+
+function doWeHaveEnoughBalanceToSell(symbol, estimatedCost, commission, quotes, balances) {
+  if (symbol == 'BTC/USDT') {
+    return (estimatedCost + commission) < (quotes.btcPrice * balances.BTC.free);
+  }
+  if (symbol == 'ETH/USDT') {
+    return (estimatedCost + commission) < (quotes.ethPrice * balances.ETH.free);
+  }
+  if (symbol == 'XRP/USDT') {
+    return (estimatedCost + commission) < (quotes.xrpPrice * balances.XRP.free);
+  }
+}
+
+function doWeHaveEnoughBalance(symbol, estimatedCost, side) {
+  const balances = JSON.parse(localStorage.getItem('balances'));
+  const quotes = JSON.parse(localStorage.getItem('quotes'));
+  var commission = 3;
+
+  if (side == 'buy') {
+    return estimatedCost + commission < balances.USDT.free;
+  } else {
+    return doWeHaveEnoughBalanceToSell(symbol, estimatedCost, commission, quotes, balances)
   }
 }
 
@@ -51,14 +75,14 @@ function captureOrderInformation() {
   var type = '';
   var side = '';
   var amount = parseFloat($('#newOrder .js-amount').val());;
-  var estimatedCost =0;
+  var estimatedCost = 0;
   var price = 0;
 
   // Get Quotes
-  const quotes = localStorage.getItem('quotes');
-  var btcPrice = JSON.parse(quotes).btcPrice;
-  var ethPrice = JSON.parse(quotes).ethPrice;
-  var xrpPrice = JSON.parse(quotes).xrpPrice;
+  const quotes = JSON.parse(localStorage.getItem('quotes'));
+  var btcPrice = quotes.btcPrice;
+  var ethPrice = quotes.ethPrice;
+  var xrpPrice = quotes.xrpPrice;
 
   // Get Symbol
   if ($('.js-btc-trade').attr('checked')) symbol = $('.js-btc-trade').val();
@@ -125,7 +149,6 @@ function createOrder(symbol, type, side, amount, estimatedCost, price) {
     },
   });
 }
-
 
 // prepareOrder
 function prepareOrder(symbol, type, side, amount, estimatedCost, price) {
@@ -212,6 +235,15 @@ function validateOrder(symbol, type, side, amount, estimatedCost, price) {
     return
   }
 
+  // Validates if we have enough balance
+  if (!doWeHaveEnoughBalance(symbol, estimatedCost, side)) {
+    var img = '<img src="img/warning.png" class="d-block">';
+    var msg = 'There is no enough balance for this order'
+    $('.js-order-result').html(img + msg);
+    $('.js-order-result').addClass('error');
+    return
+  }
+  
   prepareOrder(symbol, type, side, amount, estimatedCost, price);
 }
 

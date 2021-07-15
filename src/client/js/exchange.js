@@ -22,6 +22,7 @@ function fetchBalances() {
     $('.js-xrp-total').html(data.XRP.total.toFixed(2));
     $('.js-xrp-used').html(data.XRP.used.toFixed(2));
     $('.js-xrp-avaliable').html(data.XRP.free.toFixed(2));
+    localStorage.setItem('balances', JSON.stringify(data));
   }).done(function() {
     $.get( "/fetchQuotes", function(data) {
       $('.js-btc-total-usdt').html('$ ' + ($('.js-btc-total').text() * data.btcPrice).toFixed(2));
