@@ -1,0 +1,63 @@
+.hero{
+  margin: 40px 0 30px;
+}
+
+.hero-bull,
+.hero-bear {
+  width: 49%;
+}
+
+.hero-bear {
+  transform: scaleX(-1);
+}
+
+.wallet-option {
+  padding: 15px 20px;
+  border: 3px solid #2a5557;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.wallet-option:hover,
+.wallet-option:active {
+  background: #2a5557;
+}
+
+.wallet-option img {
+  width: 45px;
+  margin-right: 14px;
+}
+
+.crud h3 {
+  padding: 25px 15px 10px 0;
+  border-bottom: 1px solid #2a5557;
+}
+
+/* Create Wallet */
+
+.create-wallet input {
+  width: 100%;
+  color: #009ea3;
+  background-color: #003335;
+  border: 0;
+  border-bottom: 1px solid #2a5557;
+  padding: 15px;
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.create-wallet input::placeholder {
+  font-weight: normal;
+}
+
+.create-wallet .create-wallet-btn {
+  text-align: center;
+  padding: 18px;
+  font-size: 22px;
+  width: 100%;
+  border-radius: 6px;
+  background-color: #009ea3;
+}

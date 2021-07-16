@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/walletsRoom.css">
+    <title>BinoBot Jason v1</title>
+  </head>
+  <body>
+
+    <div class="hero container">
+      <img src="../img/bull-market.svg" class="hero-bull">
+      <img src="../img/bear-market.svg" class="hero-bear">
+    </div>
+
+    <section class="wallets-room">
+      <div class="container">
+        <h3 class="mb-3">Wallets</h3>
+        <div class="wallet-option d-flex align-items-center">
+          <img src="../img/purse.svg" class="bot-icon">
+          <h5 class="m-0">Wallet Rolo</h5>
+        </div>
+        <div class="wallet-option d-flex align-items-center">
+          <img src="../img/purse.svg" class="bot-icon">
+          <h5 class="m-0">Wallet Rolo</h5>
+        </div>
+      </div>
+    </section>
+
+    <section class="crud">
+      <div class="container">
+        
+        <h3 data-toggle="collapse" href="#create-wallet-box" role="button" aria-expanded="false" aria-controls="collapseExample">
+          Create Bot
+        </h3>
+
+        <div class="collapse" id="create-wallet-box">
+          <form class="create-wallet">
+            <input class="js-new-api" type="text" placeholder="New API" />
+            <input class="js-new-secret" type="text" placeholder="New Secret Key" />
+            <input class="js-new-name" type="text" placeholder="New Name" />
+            <p class="js-create-wallet create-wallet-btn">Create Wallet</p>
+          </form>
+        </div>
+
+        <h3 data-toggle="collapse" href="#remove-wallet-box" role="button" aria-expanded="false" aria-controls="collapseExample">
+          Remove Bot
+        </h3>
+
+        <div class="collapse" id="remove-wallet-box">
+          Hola
+        </div>
+
+      </div>
+    </section>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <script src="../js/walletsRoom.js"></script>
+  </body>
+</html>

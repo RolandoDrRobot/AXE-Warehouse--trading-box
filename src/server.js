@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '/client/index.html'));
+  res.sendFile(path.join(__dirname, '/client//pages/walletsRoom.html'));
 });
 app.use(express.static('src/client'));
 

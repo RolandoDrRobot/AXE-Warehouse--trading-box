@@ -72,23 +72,23 @@ nav .logo {
 }
 
 /* -----------------------
-/* --- Dashboard Bot --- 
+/* --- Dashboard --- 
 /* -------------------- */
 
-.bot {
+.wallet {
   padding: 0 10px 15px;
   margin: 100px 0 18px;
 }
 
-.bot h3 {
+.wallet h3 {
   font-size: 22px;
 }
 
-.bot h4 {
+.wallet h4 {
   font-size: 16px;
 }
 
-.bot img {
+.wallet img {
   width: 25px;
 }
 
@@ -96,7 +96,7 @@ nav .logo {
   color: var(--normal-tourquese);
 }
 
-.bot .label {
+.wallet .label {
   font-weight: normal;
   font-size: 12px;
 }
