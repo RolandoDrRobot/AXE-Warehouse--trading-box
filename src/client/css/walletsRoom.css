@@ -30,6 +30,10 @@
   margin-right: 14px;
 }
 
+.crud {
+  margin-bottom: 30px;
+}
+
 .crud h3 {
   padding: 25px 15px 10px 0;
   border-bottom: 1px solid #2a5557;
@@ -37,7 +41,7 @@
 
 /* Create Wallet */
 
-.create-wallet input {
+.create-remove-wallet input {
   width: 100%;
   color: #009ea3;
   background-color: #003335;
@@ -49,11 +53,11 @@
   margin-bottom: 12px;
 }
 
-.create-wallet input::placeholder {
+.create-remove-wallet input::placeholder {
   font-weight: normal;
 }
 
-.create-wallet .create-wallet-btn {
+.create-remove-wallet .create-remove-wallet-btn {
   text-align: center;
   padding: 18px;
   font-size: 22px;
