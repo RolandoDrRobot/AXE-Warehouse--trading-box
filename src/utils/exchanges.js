@@ -1,4 +1,4 @@
-require("dotenv").config();
+require('dotenv').config();
 const ccxt = require('ccxt');
 
 var exchangeClient = new ccxt['binance'] ({

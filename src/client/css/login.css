@@ -1,0 +1,37 @@
+.login {
+  height: 100vh;
+}
+
+.login input {
+  display: block;
+  width: 100%;
+  color: #009ea3;
+  background-color: #003335;
+  border: 0;
+  border-bottom: 1px solid #2a5557;
+  padding: 15px;
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.login input::placeholder {
+  font-weight: normal;
+}
+
+.login-btn {
+  text-align: center;
+  padding: 18px;
+  font-size: 22px;
+  width: 100%;
+  border-radius: 6px;
+  background-color: #009ea3;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.login-btn:hover,
+.login-btn:active {
+  background-color: #00cfd6;
+}

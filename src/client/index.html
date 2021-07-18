@@ -10,14 +10,44 @@
   </head>
   <body>
 
+    <nav class="fixed-top">
+      <div class="container d-flex justify-content-between">
+        <div>
+          <img src="img/logo.svg" alt="Logo" class="logo mr-2" />BinoBot
+        </div>
+        <div class="d-flex align-items-center">
+          <a href="#" class="update-balances">
+            <img class="reload" src="img/reload.png" onClick="location.reload();" />
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <section class="container">
+      <div class="login d-flex justify-content-cente align-items-center">
+        <div>
+          <div class="hero">
+            <img src="../img/bull-market.svg" class="hero-bull">
+            <img src="../img/bear-market.svg" class="hero-bear">
+          </div>
+          <form>
+            <input placeholder="Username" type="text" />
+            <input placeholder="Password" type="password">
+            <p class="js-login login-btn">Login</p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer class="d-flex justify-content-center">
+      <p class="my-3">Jason v1</p>
+    </footer>
     
 
 
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-  <script src="./js/exchange.js"></script>
-  <script src="./js/traderBox.js"></script>
-  <script src="./js/orders.js"></script>
+  <script src="./js/login.js"></script>
 </body>
 </html>

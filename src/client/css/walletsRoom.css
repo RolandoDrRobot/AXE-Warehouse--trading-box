@@ -64,4 +64,11 @@
   width: 100%;
   border-radius: 6px;
   background-color: #009ea3;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.create-remove-wallet .create-remove-wallet-btn:hover,
+.create-remove-wallet .create-remove-wallet-btn:active {
+  background-color: #00cfd6;
 }
