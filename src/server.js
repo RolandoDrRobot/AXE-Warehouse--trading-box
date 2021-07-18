@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '/client//pages/dashboard.html'));
+  res.sendFile(path.join(__dirname, '/client/index.html'));
 });
 app.use(express.static('src/client'));
 
@@ -23,6 +23,15 @@ app.get('/fetchBalances', (req, res) => {
   ccxt.fetchBalances().then(function(result){
     res.json(result);
   });
+});
+
+//routes
+app.get('/walletsRoom', (req, res) => {
+  res.sendFile(path.join(__dirname, '/client//pages/walletsRoom.html'));
+});
+
+app.get('/dashboard', (req, res) => {
+  res.sendFile(path.join(__dirname, '/client//pages/dashboard.html'));
 });
 
 app.get('/fetchOrders', (req, res) => {
